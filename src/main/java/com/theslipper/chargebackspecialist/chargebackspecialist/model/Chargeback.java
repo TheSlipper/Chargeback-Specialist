@@ -1,5 +1,6 @@
 package com.theslipper.chargebackspecialist.chargebackspecialist.model;
 
+import jdk.jfr.Name;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -13,7 +14,7 @@ import java.util.UUID;
 public class Chargeback {
 
     /** Card issuer's ID of the chargeback process for this transaction. */
-    @Column(name = "chargebackProcessID", updatable = false, nullable = false)
+    @Column(name = "chargeback_process_id", updatable = false, nullable = false)
     private UUID chargebackProcessID;
 
     /**
@@ -25,106 +26,33 @@ public class Chargeback {
             name = "UUID",
             strategy = "org.hibernate.id.UUIDGenerator"
     )
-    @Column(name = "chargebackEntryID", updatable = false, nullable = false)
+    @Column(name = "chargeback_entry_id", updatable = false, nullable = false)
     private UUID chargebackEntryID;
 
     /** Code that represents the current stage of the chargeback.*/
     @Enumerated(EnumType.STRING)
+    @Column(name = "chargeback_code", updatable = false, nullable = false)
     private ChargebackCode chargebackCode;
 
     /** The date of card holder's chargeback submission. */
+    @Column(name = "chargeback_submit_date", updatable = false, nullable = false)
     private Date chargebackSubmitDate;
 
     /** The date at which the chargeback case was opened in chargeback specialist. */
+    @Column(name = "chargeback_opened_date", updatable = false, nullable = false)
     private Date chargebackOpenedDate;
 
     /** The date at which the chargeback case was processed. */
+    @Column(name = "chargeback_processed_date", updatable = false, nullable = false)
     private Date chargebackProcessedDate;
 
-    /** ID of the concerned card holder. */
-    private UUID cardHolderID;
+    /** Card holder that is a part of this chargeback process. */
+    @ManyToOne
+    private CardHolder concernedCardHolder;
 
-    /** ID of the concerned vendor. */
-    private UUID vendorID;
-
-    public Chargeback() {
-
-    }
-
-    public Chargeback(UUID chargebackProcessID, UUID chargebackEntryID, ChargebackCode chargebackCode, Date chargebackSubmitDate, Date chargebackOpenedDate, Date chargebackProcessedDate, UUID cardHolderID, UUID vendorID) {
-        this.chargebackProcessID = chargebackProcessID;
-        this.chargebackEntryID = chargebackEntryID;
-        this.chargebackCode = chargebackCode;
-        this.chargebackSubmitDate = chargebackSubmitDate;
-        this.chargebackOpenedDate = chargebackOpenedDate;
-        this.chargebackProcessedDate = chargebackProcessedDate;
-        this.cardHolderID = cardHolderID;
-        this.vendorID = vendorID;
-    }
-
-    public UUID getChargebackProcessID() {
-        return chargebackProcessID;
-    }
-
-    public void setChargebackProcessID(UUID chargebackID) {
-        this.chargebackProcessID = chargebackID;
-    }
-
-    public UUID getChargebackEntryID() {
-        return chargebackEntryID;
-    }
-
-    public void setChargebackEntryID(UUID chargebackEntryID) {
-        this.chargebackEntryID = chargebackEntryID;
-    }
-
-    public ChargebackCode getChargebackCode() {
-        return chargebackCode;
-    }
-
-    public void setChargebackCode(ChargebackCode chargebackCode) {
-        this.chargebackCode = chargebackCode;
-    }
-
-    public Date getChargebackSubmitDate() {
-        return chargebackSubmitDate;
-    }
-
-    public void setChargebackSubmitDate(Date chargebackSubmitDate) {
-        this.chargebackSubmitDate = chargebackSubmitDate;
-    }
-
-    public Date getChargebackOpenedDate() {
-        return chargebackOpenedDate;
-    }
-
-    public void setChargebackOpenedDate(Date chargebackOpenedDate) {
-        this.chargebackOpenedDate = chargebackOpenedDate;
-    }
-
-    public Date getChargebackProcessedDate() {
-        return chargebackProcessedDate;
-    }
-
-    public void setChargebackProcessedDate(Date chargebackProcessedDate) {
-        this.chargebackProcessedDate = chargebackProcessedDate;
-    }
-
-    public UUID getCardHolderID() {
-        return cardHolderID;
-    }
-
-    public void setCardHolderID(UUID cardHolderID) {
-        this.cardHolderID = cardHolderID;
-    }
-
-    public UUID getVendorID() {
-        return vendorID;
-    }
-
-    public void setVendorID(UUID vendorID) {
-        this.vendorID = vendorID;
-    }
+    /** Vendor that is a part of this chargeback process. */
+    @ManyToOne
+    private Vendor concernedVendor;
 
     public enum ChargebackCode {
         // >>>>>>>>>>>>>>>> VISA <<<<<<<<<<<<<<<<
