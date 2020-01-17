@@ -1,27 +1,30 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-    <button class="btn btn-primary" id="menu-toggle">Toggle Menu</button>
+<html xmlns:th="http://www.thymeleaf.org">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+        <button class="btn btn-primary" id="menu-toggle">Toggle Menu</button>
 
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link">Statistics Dashboard</a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link">Chargeback Listing</a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link">Your Profile</a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link">User Management</a>
-            </li>
-        </ul>
-    </div>
-</nav>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                <li th:class="${sectionName == 'Home'} ? 'nav-item active' : 'nav-item'">
+                    <a class="nav-link" href="/home/home">Home</a>
+                </li>
+                <li th:class="${sectionName == 'Statistics Dashboard'} ? 'nav-item active' : 'nav-item'">
+                    <a href="/statistics/overview" class="nav-link">Statistics Dashboard</a>
+                </li>
+                <li th:class="${sectionName == 'Chargeback Processing'} ? 'nav-item active' : 'nav-item'">
+                    <a href="/chargebacks/listing" class="nav-link">Chargeback Processing</a> <!-- TODO: Default page may change-->
+                </li>
+                <li th:class="${sectionName == 'Your Profile'} ? 'nav-item active' : 'nav-item'">
+                    <a href="/profile/overview" class="nav-link">Your Profile</a> <!-- TODO: Default page may change-->
+                </li>
+                <li th:class="${sectionName == 'User Management'} ? 'nav-item active' : 'nav-item'">
+                    <a href="/usrmanagement/listing" class="nav-link">User Management</a> <!-- TODO: Default page may change-->
+                </li>
+            </ul>
+        </div>
+    </nav>
+</html>

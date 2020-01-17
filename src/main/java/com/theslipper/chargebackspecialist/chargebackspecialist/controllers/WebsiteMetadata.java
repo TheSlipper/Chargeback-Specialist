@@ -1,14 +1,25 @@
 package com.theslipper.chargebackspecialist.chargebackspecialist.controllers;
 
+// TODO: Javadoc
 public class WebsiteMetadata {
     private String sectionName;
     private String subsectionName;
-    private String[] sidebarStrings;
+    private String[] sidebarTitles;
+    private String[] sidebarLinks;
 
-    public WebsiteMetadata(String sectionName, String subsectionName, String[] sidebarStrings) {
+    public WebsiteMetadata(String sectionName, String subsectionName, String[] sidebarTitles, String[] sidebarLinks) {
         this.sectionName = sectionName;
         this.subsectionName = subsectionName;
-        this.sidebarStrings = sidebarStrings;
+        this.sidebarTitles = sidebarTitles;
+        this.sidebarLinks = sidebarLinks;
+    }
+
+    public String[] getSidebarLinks() {
+        return sidebarLinks;
+    }
+
+    public void setSidebarLinks(String[] sidebarLinks) {
+        this.sidebarLinks = sidebarLinks;
     }
 
     public String getSectionName() {
@@ -27,11 +38,11 @@ public class WebsiteMetadata {
         this.subsectionName = subsectionName;
     }
 
-    public String[] getSidebarStrings() {
-        return sidebarStrings;
+    public String[] getSidebarTitles() {
+        return sidebarTitles;
     }
 
-    public void setSidebarStrings(String[] sidebarStrings) {
-        this.sidebarStrings = sidebarStrings;
+    public void setSidebarTitles(String[] sidebarTitles) {
+        this.sidebarTitles = sidebarTitles;
     }
 }

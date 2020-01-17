@@ -2,8 +2,9 @@
     <div class="bg-light border-right" id="sidebar-wrapper">
         <div class="sidebar-heading">Chargeback Specialist</div>
         <div class="list-group list-group-flush">
-            <th:block th:each="sectionString : ${sidebarString}">
-                <a th:href="${sectionName}+'/'+${sectionString}" class="list-group-item list-group-item-action bg-light" th:text="${sectionString}"></a>
+            <th:block th:each="sidebarTitle,iter : ${sidebarTitles}">
+                <a th:href="${sidebarLinks[iter.index]}" class="list-group-item list-group-item-action bg-light"
+                   th:text="${sidebarTitle}"></a>
             </th:block>
         </div>
         <div style="bottom: 0px; position: absolute; font-style: italic; color: #636e72" class="ml-4">&copy; Kornel Domeradzki 2020</div>

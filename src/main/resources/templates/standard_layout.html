@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/common-layout/head :: head(sectionName = ${metadata.sectionName})">
+<head th:replace="/fragments/common-layout/head :: head(sectionName = ${metadata.sectionName})">
 </head>
 <body>
     <div class="d-flex" id="wrapper">
-        <div th:replace="fragments/common-layout/sidebar :: #sidebar-wrapper(sectionName = ${metadata.sectionName}, sidebarString = ${metadata.sidebarStrings})"></div>
+        <div th:replace="/fragments/common-layout/sidebar :: #sidebar-wrapper(sidebarLinks = ${metadata.sidebarLinks},
+                sidebarTitles = ${metadata.sidebarTitles})"></div>
         <div id="page-content-wrapper">
-            <nav th:replace="fragments/common-layout/navbar :: nav"></nav>
-            <div th:replace="fragments/Home/Home :: div"></div>
+            <nav th:replace="/fragments/common-layout/navbar :: nav(sectionName = ${metadata.sectionName})"></nav>
+<!--            <div th:replace="fragments/Home/Home :: div"></div>-->
+            <div th:replace="'/fragments/'+${metadata.sectionName}+'/'+${metadata.subsectionName} :: div"></div>
         </div>
     </div>
     <!-- TODO: Can this be static -->
-    <span th:replace="fragments/common-layout/post-content :: span"></span>
+    <span th:replace="/fragments/common-layout/post-content :: span"></span>
 </body>
 </html>
