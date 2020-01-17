@@ -10,11 +10,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class DefaultViewController {
 
-    @RequestMapping(value = {"/", "/home"})
-    public String greeting(Model model) {
-//        model.addAttribute("name", name);
-        model.addAttribute("sectionName", "Home");
-        return "home";
+    private final String standardLayoutModelName = "standard_layout";
+    private final String[] homeSubWebsites = {"Home", "Updates", "Help"};
+
+    @RequestMapping(value = {"/", "/Home", "/Home/Home"})
+    public String homeHome(Model model) {
+        model.addAttribute("metadata", new WebsiteMetadata("Home", "Home", homeSubWebsites));
+        return standardLayoutModelName;
+    }
+
+    @RequestMapping(value = "/Home/Updates")
+    public String homeUpdates(Model model) {
+        model.addAttribute("metadata", new WebsiteMetadata("Home", "Updates", homeSubWebsites));
+        return standardLayoutModelName;
     }
 
 }

@@ -1,10 +1,11 @@
-<div class="bg-light border-right" id="sidebar-wrapper">
-    <div class="sidebar-heading">Chargeback Specialist</div>
-    <div class="list-group list-group-flush">
-        <a href="#" class="list-group-item list-group-item-action bg-light">Home</a>
-        <a href="#" class="list-group-item list-group-item-action bg-light">Statistics Dashboard</a>
-        <a href="#" class="list-group-item list-group-item-action bg-light">Chargeback Listing</a>
-        <a href="#" class="list-group-item list-group-item-action bg-light">Your Profile</a>
-        <a href="#" class="list-group-item list-group-item-action bg-light">User Management</a>
+<html xmlns:th="http://www.thymeleaf.org">
+    <div class="bg-light border-right" id="sidebar-wrapper">
+        <div class="sidebar-heading">Chargeback Specialist</div>
+        <div class="list-group list-group-flush">
+            <th:block th:each="sectionString : ${sidebarString}">
+                <a th:href="${sectionName}+'/'+${sectionString}" class="list-group-item list-group-item-action bg-light" th:text="${sectionString}"></a>
+            </th:block>
+        </div>
+        <div style="bottom: 0px; position: absolute; font-style: italic; color: #636e72" class="ml-4">&copy; Kornel Domeradzki 2020</div>
     </div>
-</div>
+</html>

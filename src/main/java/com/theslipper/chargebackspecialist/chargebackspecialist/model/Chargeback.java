@@ -1,6 +1,5 @@
 package com.theslipper.chargebackspecialist.chargebackspecialist.model;
 
-import jdk.jfr.Name;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
