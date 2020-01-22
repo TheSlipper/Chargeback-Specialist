@@ -1,3 +1,122 @@
 <div class="container-fluid">
-<h1>Hello Processing Queue!</h1>
+    <h1>Processing Queue</h1>
+    <style>
+      .disable-text {
+          -webkit-user-select: none;
+          -webkit-touch-callout: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          user-select: none;
+      }
+    </style>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Chargeback Process</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-2">
+                        <div class="column">
+                            Chargeback Process ID
+                        </div>
+                        <div class="column">
+                            <input type="text" value="3" class="field left form-control disable-text" readonly>
+                        </div>
+                        <div class="column">
+                            <button class="btn btn-light">&#x2398 Copy to clipboard</button>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="column">
+                            Chargeback Entry ID:
+                        </div>
+                        <div class="column">
+                            <input type="text" value="3" class="field left form-control disable-text" readonly>
+                        </div>
+                        <div class="column">
+                            <button class="btn btn-light">&#x2398 Copy to clipboard</button>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="column">
+                            Chargeback code:
+                        </div>
+                        <div class="column">
+                            <input type="text" value="3" class="field left form-control disable-text" readonly>
+                        </div>
+                        <div class="column">
+                            <button class="btn btn-light">&#x2398 Copy to clipboard</button>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="column">
+                            Opened on:
+                        </div>
+                        <div class="column">
+                            <input type="text" value="3" class="field left form-control disable-text" readonly>
+                        </div>
+                        <div class="column">
+                            <button class="btn btn-light">&#x2398 Copy to clipboard</button>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="column">
+                            Processed on:
+                        </div>
+                        <div class="column">
+                            <input type="text" value="3" class="field left form-control disable-text" readonly>
+                        </div>
+                        <div class="column">
+                            <button class="btn btn-light">&#x2398 Copy to clipboard</button>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="column">
+                            Cardholder Data:
+                        </div>
+                        <div class="column">
+                            <input type="text" value="3" class="field left form-control disable-text" readonly>
+                        </div>
+                        <div class="column">
+                            <button class="btn btn-light">&#x2398 Copy to clipboard</button>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="column">
+                            Vendor Data:
+                        </div>
+                        <div class="column">
+                            <input type="text" value="3" class="field left form-control disable-text" readonly>
+                        </div>
+                        <div class="column">
+                            <button class="btn btn-light">&#x2398 Copy to clipboard</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-success">Defend the merchant</button>
+                    <button class="btn btn-danger">Don't defend the merchant</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card">
+            <div class="card-header">
+                <h5>Today's statistics</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    Processed chargebacks: 12
+                </div>
+                <div class="row">
+                    Times merchant was defended: 6
+                </div>
+                <div class="row">
+                    Times merchant wasn't defended: 6
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
 </div>
