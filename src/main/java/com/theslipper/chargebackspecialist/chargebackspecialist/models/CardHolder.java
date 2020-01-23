@@ -1,9 +1,8 @@
-package com.theslipper.chargebackspecialist.chargebackspecialist.model;
+package com.theslipper.chargebackspecialist.chargebackspecialist.models;
 
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.Locale;
 import java.util.UUID;
 
 /** Represents an owner of a card that is related to a chargeback case. */

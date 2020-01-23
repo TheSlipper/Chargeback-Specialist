@@ -4,7 +4,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-// TODO: Javadoc
 /**
  * Handles the incoming traffic for the home subsection of the website.
  */

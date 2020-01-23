@@ -1,4 +1,4 @@
-package com.theslipper.chargebackspecialist.chargebackspecialist.model;
+package com.theslipper.chargebackspecialist.chargebackspecialist.models;
 
 import org.hibernate.annotations.GenericGenerator;
 
