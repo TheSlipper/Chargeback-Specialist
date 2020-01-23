@@ -1,11 +1,18 @@
 package com.theslipper.chargebackspecialist.chargebackspecialist.controllers;
 
+import com.theslipper.chargebackspecialist.chargebackspecialist.models.Chargeback;
+import com.theslipper.chargebackspecialist.chargebackspecialist.services.ChargebackService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class ChargebackProcessingViewController {
+
+    @Autowired
+    ChargebackService chargebackService;
+
 
     private final String chargebackProcessingSectionLayoutName = "standard_layout";
     private final String[] chargebackProcessingSectionTitles = {
@@ -19,6 +26,10 @@ public class ChargebackProcessingViewController {
 
     @RequestMapping(value = {"/chargebacks/", "/chargebacks/listing"})
     public String chargebacksListing(Model model) {
+        chargebackService.getAllChargebackEntries().forEach(chargeback -> {
+            model.addAttribute("shitData", chargeback);
+        });
+
         model.addAttribute("metadata", new WebsiteMetadata("Chargeback Processing",
                     chargebackProcessingSectionTitles[0], chargebackProcessingSectionTitles, chargebackProcessingSectionLinks));
         return chargebackProcessingSectionLayoutName;

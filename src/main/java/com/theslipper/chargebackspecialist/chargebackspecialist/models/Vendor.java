@@ -28,28 +28,4 @@ public class Vendor {
      */
     @ManyToOne
     VendorType vendorType;
-
-    public UUID getVendorID() {
-        return vendorID;
-    }
-
-    public void setVendorID(UUID vendorID) {
-        this.vendorID = vendorID;
-    }
-
-    public String getVendorName() {
-        return vendorName;
-    }
-
-    public void setVendorName(String vendorName) {
-        this.vendorName = vendorName;
-    }
-
-    public VendorType getVendorType() {
-        return vendorType;
-    }
-
-    public void setVendorType(VendorType vendorType) {
-        this.vendorType = vendorType;
-    }
 }
