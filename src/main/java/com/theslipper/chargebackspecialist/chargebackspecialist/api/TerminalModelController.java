@@ -5,10 +5,9 @@ import com.theslipper.chargebackspecialist.chargebackspecialist.repositories.Ter
 import com.theslipper.chargebackspecialist.chargebackspecialist.services.TerminalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @RequestMapping("/api/v1/terminalmodel")
 @RestController
@@ -26,4 +25,22 @@ public class TerminalModelController {
         terminalService.addTerminalModel(tm);
     }
 
+    // TODO: Test
+    @DeleteMapping(path = "{id}")
+    private void removeTerminalModel(@PathVariable("id") UUID id) {
+        terminalService.rmTerminalModelByID(id);
+    }
+
+    // TODO: Test
+    @GetMapping
+    private Iterable<TerminalModel> getTerminalModels() {
+        Iterable<TerminalModel> test = terminalService.getAllTerminalModels();
+        return test;
+    }
+
+    // TODO: Test
+    @GetMapping(path = "{id}")
+    private TerminalModel getTerminalModel(@PathVariable("id") UUID id) {
+        return terminalService.getTerminalModelByID(id).orElse(new TerminalModel());
+    }
 }

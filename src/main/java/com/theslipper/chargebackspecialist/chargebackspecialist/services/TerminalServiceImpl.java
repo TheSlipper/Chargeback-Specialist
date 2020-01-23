@@ -6,6 +6,9 @@ import com.theslipper.chargebackspecialist.chargebackspecialist.repositories.Ter
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+import java.util.UUID;
+
 @Service
 public class TerminalServiceImpl implements TerminalService {
 
@@ -18,5 +21,20 @@ public class TerminalServiceImpl implements TerminalService {
     @Override
     public void addTerminalModel(TerminalModel tm) {
         terminalModelRepository.save(tm);
+    }
+
+    @Override
+    public void rmTerminalModelByID(UUID id) {
+        terminalModelRepository.deleteById(id);
+    }
+
+    @Override
+    public Iterable<TerminalModel> getAllTerminalModels() {
+        return terminalModelRepository.findAll();
+    }
+
+    @Override
+    public Optional<TerminalModel> getTerminalModelByID(UUID id) {
+        return terminalModelRepository.findById(id);
     }
 }

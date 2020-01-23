@@ -1,5 +1,6 @@
 package com.theslipper.chargebackspecialist.chargebackspecialist.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -32,4 +33,8 @@ public class VendorType {
             // TODO:
     }
 
+    public VendorType(@JsonProperty("vendorTypeName") String vendorTypeName, @JsonProperty("vendorTypeDescription") String vendorTypeDescription) {
+        this.vendorTypeName = vendorTypeName;
+        this.vendorTypeDescription = vendorTypeDescription;
+    }
 }
