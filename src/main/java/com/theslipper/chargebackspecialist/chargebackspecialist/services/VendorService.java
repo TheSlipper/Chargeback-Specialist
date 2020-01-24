@@ -3,18 +3,20 @@ package com.theslipper.chargebackspecialist.chargebackspecialist.services;
 import com.theslipper.chargebackspecialist.chargebackspecialist.models.Vendor;
 import com.theslipper.chargebackspecialist.chargebackspecialist.models.VendorType;
 
-import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public interface VendorService {
-    List<VendorType> getAllVendorTypes();
-    List<Vendor> getAllVendors();
+    void addVendorType(VendorType vendorType);
+    void rmVendorTypeByID(UUID id);
+    Iterable<VendorType> getAllVendorTypes();
+    Optional<VendorType> getVendorTypeByID(UUID id);
+    Iterable<VendorType> getVendorTypesByName(String name);
 
-    VendorType getVendorTypeByID(UUID id);
-    Vendor getVendorByID(UUID id);
-
-    VendorType getVendorTypeByName(String name);
-    Vendor getVendorByName(String name);
-
-    List<Vendor> getVIPVendors();
+    void addVendor(Vendor vendor);
+    void rmVendorByID(UUID id);
+    Iterable<Vendor> getAllVendors();
+    Optional<Vendor> getVendorByID(UUID id);
+    Iterable<Vendor> getVendorsByName(String name);
+    Iterable<Vendor> getVIPVendors();
 }

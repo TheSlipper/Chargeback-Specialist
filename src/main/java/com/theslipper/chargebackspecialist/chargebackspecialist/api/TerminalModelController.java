@@ -12,6 +12,7 @@ import java.util.UUID;
 @RequestMapping("/api/v1/terminalmodel")
 @RestController
 public class TerminalModelController {
+    // TODO: Make api controller for terminal
 
     private final TerminalService terminalService;
 

@@ -29,12 +29,36 @@ public class VendorType {
     @Column(name = "vendor_type_description")
     private String vendorTypeDescription;
 
-    public enum vendorPrivilege {
-            // TODO:
+    public VendorType() {
+
     }
 
     public VendorType(@JsonProperty("vendorTypeName") String vendorTypeName, @JsonProperty("vendorTypeDescription") String vendorTypeDescription) {
         this.vendorTypeName = vendorTypeName;
+        this.vendorTypeDescription = vendorTypeDescription;
+    }
+
+    public UUID getVendorTypeID() {
+        return vendorTypeID;
+    }
+
+    public void setVendorTypeID(UUID vendorTypeID) {
+        this.vendorTypeID = vendorTypeID;
+    }
+
+    public String getVendorTypeName() {
+        return vendorTypeName;
+    }
+
+    public void setVendorTypeName(String vendorTypeName) {
+        this.vendorTypeName = vendorTypeName;
+    }
+
+    public String getVendorTypeDescription() {
+        return vendorTypeDescription;
+    }
+
+    public void setVendorTypeDescription(String vendorTypeDescription) {
         this.vendorTypeDescription = vendorTypeDescription;
     }
 }

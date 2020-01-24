@@ -1,5 +1,6 @@
 package com.theslipper.chargebackspecialist.chargebackspecialist.services;
 
+import com.theslipper.chargebackspecialist.chargebackspecialist.models.Terminal;
 import com.theslipper.chargebackspecialist.chargebackspecialist.models.TerminalModel;
 import com.theslipper.chargebackspecialist.chargebackspecialist.repositories.TerminalModelRepository;
 import com.theslipper.chargebackspecialist.chargebackspecialist.repositories.TerminalRepository;
@@ -36,5 +37,25 @@ public class TerminalServiceImpl implements TerminalService {
     @Override
     public Optional<TerminalModel> getTerminalModelByID(UUID id) {
         return terminalModelRepository.findById(id);
+    }
+
+    @Override
+    public void addTerminal(Terminal terminal) {
+        terminalRepository.save(terminal);
+    }
+
+    @Override
+    public void rmTerminalByID(UUID id) {
+        terminalRepository.deleteById(id);
+    }
+
+    @Override
+    public Iterable<Terminal> getAllTerminals() {
+        return terminalRepository.findAll();
+    }
+
+    @Override
+    public Optional<Terminal> getTerminalByID(UUID id) {
+        return terminalRepository.findById(id);
     }
 }
