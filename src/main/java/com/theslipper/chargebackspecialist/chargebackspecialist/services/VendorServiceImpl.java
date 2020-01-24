@@ -47,6 +47,7 @@ public class VendorServiceImpl implements VendorService {
     @Override
     public Iterable<VendorType> getVendorTypesByName(String name) {
         // TODO: Test this out
+        // TODO: Perhaps use this in controller
         Iterable<VendorType> vendorTypes = () -> StreamSupport.
                 stream(this.vendorTypeRepository.findAll().spliterator(),false)
                 .filter(vendorType -> vendorType.getVendorTypeName().contains(name)).iterator();
@@ -65,21 +66,23 @@ public class VendorServiceImpl implements VendorService {
 
     @Override
     public Iterable<Vendor> getAllVendors() {
-        return null;
+        return this.vendorRepository.findAll();
     }
 
     @Override
     public Optional<Vendor> getVendorByID(UUID id) {
-        return null;
+        return this.vendorRepository.findById(id);
     }
 
     @Override
     public Iterable<Vendor> getVendorsByName(String name) {
+        // TODO:
         return null;
     }
 
     @Override
     public Iterable<Vendor> getVIPVendors() {
+        // TODO:
         return null;
     }
 }

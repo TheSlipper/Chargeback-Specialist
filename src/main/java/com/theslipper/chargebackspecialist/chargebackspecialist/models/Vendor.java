@@ -1,5 +1,6 @@
 package com.theslipper.chargebackspecialist.chargebackspecialist.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -28,4 +29,38 @@ public class Vendor {
      */
     @ManyToOne
     VendorType vendorType;
+
+    public Vendor() {
+
+    }
+
+    public Vendor(@JsonProperty("vendorName") String vendorName, @JsonProperty("vendorType") VendorType vendorType) {
+        this.vendorName = vendorName;
+        this.vendorType = vendorType;
+        // TODO: Czy można zamienić type na ID
+    }
+
+    public UUID getVendorID() {
+        return vendorID;
+    }
+
+    public void setVendorID(UUID vendorID) {
+        this.vendorID = vendorID;
+    }
+
+    public String getVendorName() {
+        return vendorName;
+    }
+
+    public void setVendorName(String vendorName) {
+        this.vendorName = vendorName;
+    }
+
+    public VendorType getVendorType() {
+        return vendorType;
+    }
+
+    public void setVendorType(VendorType vendorType) {
+        this.vendorType = vendorType;
+    }
 }

@@ -12,8 +12,12 @@ import java.util.UUID;
 @RestController
 public class VendorTypeController {
 
+    private final VendorService vendorService;
+
     @Autowired
-    private VendorService vendorService;
+    public VendorTypeController(VendorService vendorService) {
+        this.vendorService = vendorService;
+    }
 
     @PutMapping
     private void addVendorType(@RequestBody VendorType vendorType) {

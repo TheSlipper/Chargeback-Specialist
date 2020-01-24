@@ -33,9 +33,11 @@ public class VendorType {
 
     }
 
-    public VendorType(@JsonProperty("vendorTypeName") String vendorTypeName, @JsonProperty("vendorTypeDescription") String vendorTypeDescription) {
+    public VendorType(@JsonProperty("vendorTypeID") UUID id, @JsonProperty("vendorTypeName") String vendorTypeName,
+                      @JsonProperty("vendorTypeDescription") String vendorTypeDescription) {
         this.vendorTypeName = vendorTypeName;
         this.vendorTypeDescription = vendorTypeDescription;
+        this.vendorTypeID = id;
     }
 
     public UUID getVendorTypeID() {
