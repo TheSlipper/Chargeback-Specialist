@@ -30,7 +30,6 @@ public class VendorType {
     private String vendorTypeDescription;
 
     public VendorType() {
-
     }
 
     public VendorType(@JsonProperty("vendorTypeID") UUID id, @JsonProperty("vendorTypeName") String vendorTypeName,
