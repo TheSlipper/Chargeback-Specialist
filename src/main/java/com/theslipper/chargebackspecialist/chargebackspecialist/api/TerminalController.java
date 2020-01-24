@@ -1,7 +1,6 @@
 package com.theslipper.chargebackspecialist.chargebackspecialist.api;
 
 import com.theslipper.chargebackspecialist.chargebackspecialist.models.Terminal;
-import com.theslipper.chargebackspecialist.chargebackspecialist.models.TerminalModel;
 import com.theslipper.chargebackspecialist.chargebackspecialist.services.TerminalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

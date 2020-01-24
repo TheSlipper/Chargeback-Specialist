@@ -1,5 +1,6 @@
 package com.theslipper.chargebackspecialist.chargebackspecialist.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -35,5 +36,38 @@ public class SystemUserRole {
         SEND_UPDATE_MESSAGE,
         DELETE_UPDATE_MESSAGE,
         EDIT_UPDATE_MESSAGE
+    }
+
+    public SystemUserRole(@JsonProperty("systemUserRoleName") String systemUserRoleName,
+                          @JsonProperty("systemPermissions") SystemPermission[] permissions) {
+        this.systemUserRoleName = systemUserRoleName;
+        this.permissions = permissions;
+    }
+
+    public SystemUserRole() {
+    }
+
+    public UUID getSystemUserRoleID() {
+        return systemUserRoleID;
+    }
+
+    public void setSystemUserRoleID(UUID systemUserRoleID) {
+        this.systemUserRoleID = systemUserRoleID;
+    }
+
+    public String getSystemUserRoleName() {
+        return systemUserRoleName;
+    }
+
+    public void setSystemUserRoleName(String systemUserRoleName) {
+        this.systemUserRoleName = systemUserRoleName;
+    }
+
+    public SystemPermission[] getPermissions() {
+        return permissions;
+    }
+
+    public void setPermissions(SystemPermission[] permissions) {
+        this.permissions = permissions;
     }
 }
