@@ -5,8 +5,11 @@ import com.theslipper.chargebackspecialist.chargebackspecialist.models.SystemUse
 import com.theslipper.chargebackspecialist.chargebackspecialist.repositories.SystemUserRepository;
 import com.theslipper.chargebackspecialist.chargebackspecialist.repositories.SystemUserRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.Iterator;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -32,6 +35,12 @@ public class SystemUserServiceImpl implements SystemUserService {
     @Override
     public Iterable<SystemUser> getAllSystemUsers() {
         return this.systemUserRepository.findAll();
+    }
+
+    @Override
+    public Page<SystemUser> getSystemUsersFromPage(int pageNo) {
+        Page<SystemUser> users = systemUserRepository.findAll(PageRequest.of(pageNo, 5));
+        return users;
     }
 
     @Override

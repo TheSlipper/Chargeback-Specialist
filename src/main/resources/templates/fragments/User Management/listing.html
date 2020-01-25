@@ -1,3 +1,4 @@
+<html xmlns:th="http://www.thymeleaf.org">
 <div class="container-fluid">
     <div class="row mt-2">
         <div class="col">
@@ -23,22 +24,6 @@
                 Code: <input class="form-control" type="text" placeholder="Search" aria-label="Search">
             </div>
         </div>
-        <div class="row">
-            <div class="col">
-                Date of opening: <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-            </div>
-            <div class="col">
-                Date of processing: <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                Cardholder data: <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-            </div>
-            <div class="col">
-                Vendor data: <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-            </div>
-        </div>
         <button class="btn btn-block btn-primary mt-3 mb-3" type="submit">Search</button>
     </div>
     <table class="table mt-3">
@@ -47,36 +32,26 @@
             <th scope="col">User ID</th>
             <th scope="col">User's Name</th>
             <th scope="col">User's Surname</th>
+            <th scope="col">User's Role</th>
             <th scope="col">User's e-mail</th>
             <th scope="col">Account registration date</th>
-            <th scope="col">Cardholder Data</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <th scope="row">5df5cf10-02cf-491d-860b-55a14b9429e9</th>
-            <td>5df5cf10-02cf-491d-860b-55a14b9429e9</td>
-            <td>690700</td>
-            <td>1/22/2020</td>
-            <td>Not Processed</td>
-            <td>Erwin Schrödinger</td>
-        </tr>
-        <tr>
-            <th scope="row">5df5cf10-02cf-491d-860b-55a14b9429e9</th>
-            <td>5df5cf10-02cf-491d-860b-55a14b9429e9</td>
-            <td>690700</td>
-            <td>1/22/2020</td>
-            <td>Not Processed</td>
-            <td>Erwin Schrödinger</td>
-        </tr>
-        <tr>
-            <th scope="row">5df5cf10-02cf-491d-860b-55a14b9429e9</th>
-            <td>5df5cf10-02cf-491d-860b-55a14b9429e9</td>
-            <td>690700</td>
-            <td>1/22/2020</td>
-            <td>Not Processed</td>
-            <td>Erwin Schrödinger</td>
-        </tr>
+        <th:block th:each="systemUser : ${systemUsers}">
+            <tr>
+                <th scope="row" th:text="${systemUser.systemUserID}"></th>
+                <td th:text="${systemUser.systemUserName}"></td>
+                <td th:text="${systemUser.systemUserSurname}"></td>
+                <td>
+                    <th:block th:each="role : ${systemUser.systemUserRoles}">
+                        [[${role.systemUserRoleName}]]
+                    </th:block>
+                </td>
+                <td th:text="${systemUser.systemUserEmail}"></td>
+                <td th:text="${systemUser.systemUserAccountCreationDate}"></td>
+            </tr>
+        </th:block>
         </tbody>
     </table>
     <nav aria-label="Page navigation example">
@@ -93,3 +68,4 @@
         </ul>
     </nav>
 </div>
+</html>

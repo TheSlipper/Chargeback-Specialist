@@ -9,7 +9,7 @@
         <div id="page-content-wrapper">
             <nav th:replace="/fragments/common-layout/navbar :: nav(sectionName = ${metadata.sectionName})"></nav>
 <!--            <div th:replace="fragments/Home/Home :: div"></div>-->
-            <div th:replace="'/fragments/'+${metadata.sectionName}+'/'+${metadata.subsectionName} :: div"></div>
+            <div th:replace="'/fragments/'+${metadata.sectionName}+'/'+${metadata.subsectionName} :: div(systemUsers = ${systemUsers})"></div>
         </div>
     </div>
     <!-- TODO: Can this be static -->
