@@ -27,7 +27,7 @@ public class UsrManagementController {
                 usrManagementProfileSectionTitles[0], usrManagementProfileSectionTitles, usrManagementProfileSectionLinks));
         Page<SystemUser> page = this.systemUserService.getSystemUsersFromPage(0);
         model.addAttribute("systemUsers", page.toList());
-        model.addAttribute("pageNumber", 0);
+        model.addAttribute("pageNumber", 1);
         return usrManagementViewSectionLayoutName;
     }
 
@@ -35,9 +35,10 @@ public class UsrManagementController {
     public String listingByPageNo(Model model, @PathVariable("id") int pageNo) {
         model.addAttribute("metadata", new WebsiteMetadata("User Management",
                 usrManagementProfileSectionTitles[0], usrManagementProfileSectionTitles, usrManagementProfileSectionLinks));
-        Page<SystemUser> page = this.systemUserService.getSystemUsersFromPage(pageNo);
+        Page<SystemUser> page = this.systemUserService.getSystemUsersFromPage(pageNo-1);
         model.addAttribute("systemUsers", page.toList());
         model.addAttribute("pageNumber", pageNo);
+        model.addAttribute("isNextPageEmpty", this.systemUserService.isPageEmpty(pageNo+1));
         return usrManagementViewSectionLayoutName;
     }
 

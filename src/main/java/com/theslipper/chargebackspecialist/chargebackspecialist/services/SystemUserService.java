@@ -12,6 +12,7 @@ public interface SystemUserService {
     void rmSystemUserByID(UUID id);
     Iterable<SystemUser> getAllSystemUsers();
     Page<SystemUser> getSystemUsersFromPage(int pageNo);
+    boolean isPageEmpty(int pageNo);
     Optional<SystemUser> getSystemUserByID(UUID id);
 
     void addSystemUserRole(SystemUserRole systemUserRole);

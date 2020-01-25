@@ -44,6 +44,12 @@ public class SystemUserServiceImpl implements SystemUserService {
     }
 
     @Override
+    public boolean isPageEmpty(int pageNo) {
+        Page<SystemUser> users = systemUserRepository.findAll(PageRequest.of(pageNo, 5));
+        return users.isEmpty();
+    }
+
+    @Override
     public Optional<SystemUser> getSystemUserByID(UUID id) {
         return this.systemUserRepository.findById(id);
     }
