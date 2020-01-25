@@ -35,16 +35,18 @@ public class Update {
     @Column(name = "update_header", nullable = false)
     private String updateHeader;
 
-    @Column(name = "update_content", nullable = false)
+    @Column(name = "update_content", nullable = false, columnDefinition = "TEXT")
     private String updateContent;
 
-    public Update(@JsonProperty("updateCreationDate") Date updateCreationDate,
+    public Update(@JsonProperty("updateID") UUID updateID,
+                  @JsonProperty("updateCreationDate") Date updateCreationDate,
                   @JsonProperty("updateCreator") SystemUser updateCreator,
                   @JsonProperty("updateEditor") SystemUser updateEditor,
                   @JsonProperty("updateEditionDate") Date updateEditionDate,
                   @JsonProperty("updateHeader") String updateHeader,
                   @JsonProperty("updateContent") String updateContent) {
         // TODO: PUT update dummy data causes sql nested exception fix it
+        this.updateID = updateID;
         this.updateCreationDate = updateCreationDate;
         this.updateCreator = updateCreator;
         this.updateEditor = updateEditor;

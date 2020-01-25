@@ -41,15 +41,15 @@ public class SystemUser {
     @Column(name = "system_user_password_refresh_date")
     private Date systemUserPasswordRefreshDate;
 
-    @Lob
-    @OneToMany
-    @OrderColumn(name = "system_user_created_updates")
-    private Update[] systemUserCreatedUpdates;
+//    @Lob
+//    @OneToMany
+//    @OrderColumn(name = "system_user_created_updates")
+//    private Update[] systemUserCreatedUpdates;
 
-    @Lob
-    @OneToMany
-    @OrderColumn(name = "system_user_edited_updates")
-    private Update[] systemUserEditedUpdates;
+//    @Lob
+//    @OneToMany
+//    @OrderColumn(name = "system_user_edited_updates")
+//    private Update[] systemUserEditedUpdates;
 
     @Lob
     @ManyToMany
@@ -60,16 +60,18 @@ public class SystemUser {
 
     }
 
-    public SystemUser(@JsonProperty("systemUserName") String username,
+    public SystemUser(@JsonProperty("systemUserID") UUID systemUserID,
+                      @JsonProperty("systemUserName") String username,
                       @JsonProperty("systemUserSurname") String surname,
                       @JsonProperty("systemUserEmail") String email,
                       @JsonProperty("systemUserLogin") String login,
                       @JsonProperty("systemUserPassword") String password,
                       @JsonProperty("systemUserAccountCreationDate") Date systemUserAccountCreationDate,
                       @JsonProperty("systemUserPasswordRefreshDate") Date systemUserPasswordRefreshDate,
-                      @JsonProperty("systemUserCreatedUpdates") Update[] systemUserCreatedUpdates,
-                      @JsonProperty("systemUserEditedUpdates") Update[] systemUserEditedUpdates,
+//                      @JsonProperty("systemUserCreatedUpdates") Update[] systemUserCreatedUpdates,
+//                      @JsonProperty("systemUserEditedUpdates") Update[] systemUserEditedUpdates,
                       @JsonProperty("systemUserRoles") SystemUserRole[] systemUserRoles) {
+        this.systemUserID = systemUserID;
         this.systemUserName = username;
         this.systemUserSurname = surname;
         this.systemUserEmail = email;
@@ -77,8 +79,8 @@ public class SystemUser {
         this.systemUserPassword = password;
         this.systemUserAccountCreationDate = systemUserAccountCreationDate;
         this.systemUserPasswordRefreshDate = systemUserPasswordRefreshDate;
-        this.systemUserCreatedUpdates = systemUserCreatedUpdates;
-        this.systemUserEditedUpdates = systemUserEditedUpdates;
+//        this.systemUserCreatedUpdates = systemUserCreatedUpdates;
+//        this.systemUserEditedUpdates = systemUserEditedUpdates;
         this.systemUserRoles = systemUserRoles;
     }
 
@@ -146,21 +148,21 @@ public class SystemUser {
         this.systemUserPasswordRefreshDate = systemUserPasswordRefreshDate;
     }
 
-    public Update[] getSystemUserCreatedUpdates() {
-        return systemUserCreatedUpdates;
-    }
+//    public Update[] getSystemUserCreatedUpdates() {
+//        return systemUserCreatedUpdates;
+//    }
 
-    public void setSystemUserCreatedUpdates(Update[] systemUserCreatedUpdates) {
-        this.systemUserCreatedUpdates = systemUserCreatedUpdates;
-    }
+//    public void setSystemUserCreatedUpdates(Update[] systemUserCreatedUpdates) {
+//        this.systemUserCreatedUpdates = systemUserCreatedUpdates;
+//    }
 
-    public Update[] getSystemUserEditedUpdates() {
-        return systemUserEditedUpdates;
-    }
+//    public Update[] getSystemUserEditedUpdates() {
+//        return systemUserEditedUpdates;
+//    }
 
-    public void setSystemUserEditedUpdates(Update[] systemUserEditedUpdates) {
-        this.systemUserEditedUpdates = systemUserEditedUpdates;
-    }
+//    public void setSystemUserEditedUpdates(Update[] systemUserEditedUpdates) {
+//        this.systemUserEditedUpdates = systemUserEditedUpdates;
+//    }
 
     public SystemUserRole[] getSystemUserRoles() {
         return systemUserRoles;
