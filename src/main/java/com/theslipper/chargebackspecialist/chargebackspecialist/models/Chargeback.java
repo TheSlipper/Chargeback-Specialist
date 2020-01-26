@@ -7,7 +7,6 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.UUID;
 
-// TODO: Rename chargebackspecialist.chargebackspecialist.model -> chargebackspecialist.model
 /** Represents a single chargeback entry. */
 @Entity
 @Table(name = "chargebacks")
@@ -39,11 +38,11 @@ public class Chargeback {
     private Date chargebackSubmitDate;
 
     /** The date at which the chargeback case was opened in chargeback specialist. */
-    @Column(name = "chargeback_opened_date", updatable = false, nullable = false)
+    @Column(name = "chargeback_opened_date", updatable = false)
     private Date chargebackOpenedDate;
 
     /** The date at which the chargeback case was processed. */
-    @Column(name = "chargeback_processed_date", updatable = false, nullable = false)
+    @Column(name = "chargeback_processed_date", updatable = false)
     private Date chargebackProcessedDate;
 
     /** Card holder that is a part of this chargeback process. */

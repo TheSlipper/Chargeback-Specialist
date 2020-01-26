@@ -15,7 +15,14 @@
                 <div th:replace="'/fragments/'+${metadata.sectionName}+'/'+${metadata.subsectionName} :: div"></div>
             </th:block>
             <th:block th:if="${metadata.sectionName == 'Chargeback Processing'}">
-                <div th:replace="'/fragments/'+${metadata.sectionName}+'/'+${metadata.subsectionName} :: div"></div>
+                <th:block th:if="${metadata.subsectionName == 'Listing'}">
+                    <div th:replace="'/fragments/'+${metadata.sectionName}+'/'+${metadata.subsectionName} :: div(
+                        chargebacks = ${chargebacks}, pageNumber = ${pageNumber}, isNextPageEmpty = ${isNextPageEmpty}
+                    )"></div>
+                </th:block>
+                <th:block th:if="${metadata.subsectionName == 'Processing Queue'}">
+                    <div th:replace="'/fragments/'+${metadata.sectionName}+'/'+${metadata.subsectionName} :: div"></div>
+                </th:block>
             </th:block>
             <th:block th:if="${metadata.sectionName == 'Your Profile'}">
                 <div th:replace="'/fragments/'+${metadata.sectionName}+'/'+${metadata.subsectionName} :: div"></div>

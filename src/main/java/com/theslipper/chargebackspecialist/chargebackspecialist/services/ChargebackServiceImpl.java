@@ -5,6 +5,8 @@ import com.theslipper.chargebackspecialist.chargebackspecialist.models.Chargebac
 import com.theslipper.chargebackspecialist.chargebackspecialist.models.Vendor;
 import com.theslipper.chargebackspecialist.chargebackspecialist.repositories.ChargebackRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -26,6 +28,17 @@ public class ChargebackServiceImpl implements ChargebackService {
     @Override
     public Optional<Chargeback> getChargebackByID(UUID id) {
         return this.chargebackRepo.findById(id);
+    }
+
+    @Override
+    public Page<Chargeback> getChargebacksFromPage(int pageNo) {
+        return chargebackRepo.findAll(PageRequest.of(pageNo, 5));
+    }
+
+    @Override
+    public boolean isPageEmpty(int pageNo) {
+        Page<Chargeback> chargebacks = chargebackRepo.findAll(PageRequest.of(pageNo, 5));
+        return chargebacks.getTotalPages() <= pageNo;
     }
 
     @Override

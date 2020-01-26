@@ -61,4 +61,9 @@ public class CardIssuer {
     public void setProductsSupported(boolean productsSupported) {
         this.productsSupported = productsSupported;
     }
+
+    public String toString() {
+        return "Issuer ID: " + this.issuerID + "\nIssuer Name: " + this.cardIssuerName +
+                "\nProduct Supported: " + this.productsSupported;
+    }
 }

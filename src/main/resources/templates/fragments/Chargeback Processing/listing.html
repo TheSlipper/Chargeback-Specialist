@@ -1,99 +1,112 @@
-<div class="container-fluid">
-    <div class="row mt-2">
-        <div class="col">
-            <h1>Chargeback Listing</h1>
-        </div>
-        <div class="col">
-            <button class="btn btn-light align-middle" data-toggle="collapse" data-target="#search" aria-expanded="false"
-                    aria-controls="search">Toggle search section</button>
-        </div>
-    </div>
-    <div class="md-form mt-0" id="search">
-        <div class="row">
+<html xmlns:th="http://www.thymeleaf.org">
+    <div class="container-fluid">
+        <div class="row mt-2">
             <div class="col">
-                Process ID: <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+                <h1>Chargeback Listing</h1>
             </div>
             <div class="col">
-                Entry ID: <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+                <button class="btn btn-light align-middle" data-toggle="collapse" data-target="#search" aria-expanded="false"
+                        aria-controls="search">Toggle search section</button>
             </div>
         </div>
+        <div class="md-form mt-0" id="search">
+            <div class="row">
+                <div class="col">
+                    Process ID: <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+                </div>
+                <div class="col">
+                    Entry ID: <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+                </div>
+            </div>
 
-        <div class="row">
-            <div class="col">
-                Code: <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+            <div class="row">
+                <div class="col">
+                    Code: <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+                </div>
             </div>
+            <div class="row">
+                <div class="col">
+                    Date of opening: <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+                </div>
+                <div class="col">
+                    Date of processing: <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    Cardholder data: <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+                </div>
+                <div class="col">
+                    Vendor data: <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+                </div>
+            </div>
+            <button class="btn btn-block btn-primary mt-3 mb-3" type="submit">Search</button>
         </div>
-        <div class="row">
-            <div class="col">
-                Date of opening: <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-            </div>
-            <div class="col">
-                Date of processing: <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                Cardholder data: <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-            </div>
-            <div class="col">
-                Vendor data: <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-            </div>
-        </div>
-        <button class="btn btn-block btn-primary mt-3 mb-3" type="submit">Search</button>
+        <table class="table mt-3">
+            <thead>
+            <tr>
+                <th scope="col">Chargeback Process ID</th>
+                <th scope="col">Chargeback Entry ID</th>
+                <th scope="col">Chargeback Code</th>
+                <th scope="col">Opened On</th>
+                <th scope="col">Processed on</th>
+                <th scope="col">Cardholder Data</th>
+                <th scope="col">Vendor Data</th>
+            </tr>
+            </thead>
+            <tbody>
+                <th:block th:each="chargeback : ${chargebacks}">
+                    <tr>
+                        <th th:text="${chargeback.chargebackProcessID}"></th>
+                        <td th:text="${chargeback.chargebackEntryID}"></td>
+                        <td th:text="${chargeback.chargebackCode}"></td>
+                        <td th:text="${chargeback.chargebackOpenedDate}"></td>
+                        <td th:text="${chargeback.chargebackProcessedDate}"></td>
+                        <td th:text="${chargeback.concernedCardHolder}"></td>
+                        <td th:text="${chargeback.concernedVendor}"></td>
+                    </tr>
+                </th:block>
+            </tbody>
+        </table>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+<!--                <li class="page-item disabled">-->
+<!--                    <a class="page-link" href="#" tabindex="-1">Previous</a>-->
+<!--                </li>-->
+<!--                <li class="page-item"><a class="page-link" href="#">1</a></li>-->
+<!--                <li class="page-item"><a class="page-link" href="#">2</a></li>-->
+<!--                <li class="page-item"><a class="page-link" href="#">3</a></li>-->
+<!--                <li class="page-item">-->
+<!--                    <a class="page-link" href="#">Next</a>-->
+<!--                </li>-->
+                <th:block th:if="${pageNumber == 1}">
+                    <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1">Previous</a></li>
+                </th:block>
+                <th:block th:if="${pageNumber != 1}">
+                    <li class="page-item"><a class="page-link" th:href="'/chargebacks/listing/'+${pageNumber - 1}"
+                                             tabindex="-1">Previous</a></li>
+                </th:block>
+                <th:block th:if="${pageNumber != 1}">
+                    <li class="page-item"><a class="page-link" th:href="'/chargebacks/listing/'+${pageNumber - 1}"
+                                             th:text="${pageNumber - 1}">1</a></li>
+                </th:block>
+                <li class="page-item"><a class="page-link" th:href="'/chargebacks/listing/'+${pageNumber}"
+                                         th:text="${pageNumber}">2</a></li>
+                <th:block th:if="${isNextPageEmpty == true}">
+                    <li class="page-item disabled">
+                        <a class="page-link" th:href="'/chargebacks/listing/'+${pageNumber + 1}" >Next</a>
+                    </li>
+                </th:block>
+                <th:block th:if="${isNextPageEmpty == false}">
+                    <li class="page-item">
+                        <a class="page-link" th:href="'/chargebacks/listing/'+${pageNumber + 1}"
+                           th:text="${pageNumber+1}">3</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" th:href="'/chargebacks/listing/'+${pageNumber + 1}" >Next</a>
+                    </li>
+                </th:block>
+            </ul>
+        </nav>
     </div>
-    <table class="table mt-3">
-        <thead>
-        <tr>
-            <th scope="col">Chargeback Process ID</th>
-            <th scope="col">Chargeback Entry ID</th>
-            <th scope="col">Chargeback Code</th>
-            <th scope="col">Opened On</th>
-            <th scope="col">Processed on</th>
-            <th scope="col">Cardholder Data</th>
-            <th scope="col">Vendor Data</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <th scope="row">5df5cf10-02cf-491d-860b-55a14b9429e9</th>
-            <td>5df5cf10-02cf-491d-860b-55a14b9429e9</td>
-            <td>690700</td>
-            <td>1/22/2020</td>
-            <td>Not Processed</td>
-            <td>Erwin Schrödinger</td>
-            <td>Januszex Business Incorporated</td>
-        </tr>
-        <tr>
-            <th scope="row">5df5cf10-02cf-491d-860b-55a14b9429e9</th>
-            <td>5df5cf10-02cf-491d-860b-55a14b9429e9</td>
-            <td>690700</td>
-            <td>1/22/2020</td>
-            <td>Not Processed</td>
-            <td>Erwin Schrödinger</td>
-            <td>Januszex Business Incorporated</td>
-        </tr>
-        <tr>
-            <th scope="row">5df5cf10-02cf-491d-860b-55a14b9429e9</th>
-            <td>5df5cf10-02cf-491d-860b-55a14b9429e9</td>
-            <td>690700</td>
-            <td>1/22/2020</td>
-            <td>Not Processed</td>
-            <td>Erwin Schrödinger</td>
-            <td>Januszex Business Incorporated</td>
-        </tr>
-        </tbody>
-    </table>
-    <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center">
-            <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1">Previous</a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-                <a class="page-link" href="#">Next</a>
-            </li>
-        </ul>
-    </nav>
-</div>
+</html>

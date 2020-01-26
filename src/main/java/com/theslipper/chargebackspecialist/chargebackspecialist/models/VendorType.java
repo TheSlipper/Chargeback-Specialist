@@ -62,4 +62,8 @@ public class VendorType {
     public void setVendorTypeDescription(String vendorTypeDescription) {
         this.vendorTypeDescription = vendorTypeDescription;
     }
+
+    public String toString() {
+        return this.vendorTypeName;
+    }
 }

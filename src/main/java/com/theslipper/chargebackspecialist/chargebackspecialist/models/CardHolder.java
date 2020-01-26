@@ -103,4 +103,10 @@ public class CardHolder {
     public void setCardIssuer(CardIssuer cardIssuer) {
         this.cardIssuer = cardIssuer;
     }
+
+    public String toString() {
+        return "Cardholder ID: " + this.cardHoldersID + "\nFirst Name: " + this.cardholdersFirstName + "\nSurname: "
+                + this.cardHoldersSurname + "\nCountry: " + this.cardHoldersCountry + "\nCard Number: ************" +
+                this.cardholdersCardNumber.substring(12) + "\nCard Issuer: " + this.cardIssuer;
+    }
 }

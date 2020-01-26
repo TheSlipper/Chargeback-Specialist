@@ -69,7 +69,6 @@ public class UsrManagementController {
                 .orElse(new SystemUser());
         systemUser.setSystemUserLogin(original.getSystemUserLogin());
         systemUser.setSystemUserPassword(original.getSystemUserPassword());
-//        systemUser.setSystemUserRole(original.getSystemUserRole()); // TODO: Get role from form
 
         this.systemUserService.editSystemUser(systemUser);
         attributes.addFlashAttribute("flashAttribute", "redirectWithRedirectView");

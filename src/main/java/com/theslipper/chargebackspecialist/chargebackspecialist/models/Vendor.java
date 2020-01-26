@@ -63,4 +63,9 @@ public class Vendor {
     public void setVendorType(VendorType vendorType) {
         this.vendorType = vendorType;
     }
+
+    public String toString() {
+        return "Vendor ID: " + this.vendorID + "\nVendor Type: " + this.vendorType.toString() +
+                "\nVendor Name: " + this.vendorName;
+    }
 }
