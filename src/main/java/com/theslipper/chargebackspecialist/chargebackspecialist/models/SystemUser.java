@@ -2,6 +2,9 @@ package com.theslipper.chargebackspecialist.chargebackspecialist.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -20,10 +23,10 @@ public class SystemUser {
     @Column(name = "system_user_id", updatable = false, nullable = false)
     private UUID systemUserID;
 
-    @Column(name = "system_user_name", updatable = false, nullable = false)
+    @Column(name = "system_user_name", nullable = false)
     private String systemUserName;
 
-    @Column(name = "system_user_surname", updatable = false, nullable = false)
+    @Column(name = "system_user_surname", nullable = false)
     private String systemUserSurname;
 
     @Column(name = "system_user_email", nullable = false)
@@ -36,28 +39,19 @@ public class SystemUser {
     private String systemUserPassword;
 
     @Column(name = "system_user_account_creation_date", nullable = false)
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "dd-MMM-yyyy")
     private Date systemUserAccountCreationDate;
 
     @Column(name = "system_user_password_refresh_date")
+    @DateTimeFormat(pattern = "dd-MMM-yyyy")
     private Date systemUserPasswordRefreshDate;
 
-//    @Lob
-//    @OneToMany
-//    @OrderColumn(name = "system_user_created_updates")
-//    private Update[] systemUserCreatedUpdates;
-
-//    @Lob
-//    @OneToMany
-//    @OrderColumn(name = "system_user_edited_updates")
-//    private Update[] systemUserEditedUpdates;
-
-    @Lob
-    @ManyToMany
     @OrderColumn(name = "system_user_roles")
-    private SystemUserRole[] systemUserRoles;
+    @ManyToOne
+    private SystemUserRole systemUserRole;
 
     public SystemUser() {
-
     }
 
     public SystemUser(@JsonProperty("systemUserID") UUID systemUserID,
@@ -68,9 +62,7 @@ public class SystemUser {
                       @JsonProperty("systemUserPassword") String password,
                       @JsonProperty("systemUserAccountCreationDate") Date systemUserAccountCreationDate,
                       @JsonProperty("systemUserPasswordRefreshDate") Date systemUserPasswordRefreshDate,
-//                      @JsonProperty("systemUserCreatedUpdates") Update[] systemUserCreatedUpdates,
-//                      @JsonProperty("systemUserEditedUpdates") Update[] systemUserEditedUpdates,
-                      @JsonProperty("systemUserRoles") SystemUserRole[] systemUserRoles) {
+                      @JsonProperty("systemUserRoles") SystemUserRole systemUserRole) {
         this.systemUserID = systemUserID;
         this.systemUserName = username;
         this.systemUserSurname = surname;
@@ -79,9 +71,7 @@ public class SystemUser {
         this.systemUserPassword = password;
         this.systemUserAccountCreationDate = systemUserAccountCreationDate;
         this.systemUserPasswordRefreshDate = systemUserPasswordRefreshDate;
-//        this.systemUserCreatedUpdates = systemUserCreatedUpdates;
-//        this.systemUserEditedUpdates = systemUserEditedUpdates;
-        this.systemUserRoles = systemUserRoles;
+        this.systemUserRole = systemUserRole;
     }
 
     public UUID getSystemUserID() {
@@ -148,27 +138,11 @@ public class SystemUser {
         this.systemUserPasswordRefreshDate = systemUserPasswordRefreshDate;
     }
 
-//    public Update[] getSystemUserCreatedUpdates() {
-//        return systemUserCreatedUpdates;
-//    }
-
-//    public void setSystemUserCreatedUpdates(Update[] systemUserCreatedUpdates) {
-//        this.systemUserCreatedUpdates = systemUserCreatedUpdates;
-//    }
-
-//    public Update[] getSystemUserEditedUpdates() {
-//        return systemUserEditedUpdates;
-//    }
-
-//    public void setSystemUserEditedUpdates(Update[] systemUserEditedUpdates) {
-//        this.systemUserEditedUpdates = systemUserEditedUpdates;
-//    }
-
-    public SystemUserRole[] getSystemUserRoles() {
-        return systemUserRoles;
+    public SystemUserRole getSystemUserRole() {
+        return systemUserRole;
     }
 
-    public void setSystemUserRoles(SystemUserRole[] systemUserRoles) {
-        this.systemUserRoles = systemUserRoles;
+    public void setSystemUserRole(SystemUserRole systemUserRoles) {
+        this.systemUserRole = systemUserRoles;
     }
 }

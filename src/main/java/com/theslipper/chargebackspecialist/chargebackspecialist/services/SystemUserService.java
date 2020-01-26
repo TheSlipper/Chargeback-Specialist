@@ -9,6 +9,7 @@ import java.util.UUID;
 
 public interface SystemUserService {
     void addSystemUser(SystemUser systemUser);
+    void editSystemUser(SystemUser systemUser);
     void rmSystemUserByID(UUID id);
     Iterable<SystemUser> getAllSystemUsers();
     Page<SystemUser> getSystemUsersFromPage(int pageNo);

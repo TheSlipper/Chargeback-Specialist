@@ -1,0 +1,82 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<style>
+    .disable-text {
+        -webkit-user-select: none;
+        -webkit-touch-callout: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+</style>
+<div class="container-fluid">
+    <div class="card mt-3">
+        <form action="/usrmanagement/edit/" th:object="${userData}" method="post">
+            <div class="card-header" th:text="'User \'' + ${userData.systemUserLogin} + '\''"></div>
+            <div class="card-body">
+                <div class="row mb-2">
+                    <div class="column mr-2">
+                        User's Name:
+                    </div>
+                    <div class="column">
+                        <input type="text" class="field left form-control" th:field="*{systemUserName}">
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="column mr-2">
+                        User's Surname:
+                    </div>
+                    <div class="column">
+                        <input type="text" class="field left form-control" th:field="*{systemUserSurname}">
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="column mr-2">
+                        User's Role:
+                    </div>
+                    <div class="column">
+                        <select class="form-control" name="systemUserRole">
+                            <th:block th:each="role : ${allSystemRoles}">
+                                <option type="checkbox" th:value="${role.systemUserRoleID}"
+                                        th:text="${role.systemUserRoleName}">
+<!--                                    TODO: Check the current role-->
+                                </option>
+                            </th:block>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="column mr-2">
+                        User's e-mail:
+                    </div>
+                    <div class="column">
+                        <input type="text" name="system-user-email" class="field left form-control"
+                               th:field="*{systemUserEmail}">
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="column mr-2">
+                        Account registration date:
+                    </div>
+                    <div class="column">
+                        <input class="field left form-control disable-text"
+                               th:field="*{systemUserAccountCreationDate}" readonly>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="column mr-2">
+                        User ID:
+                    </div>
+                    <div class="column">
+                        <input type="text" class="field left form-control disable-text"
+                               th:field="*{systemUserID}" name="system-user-id" readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-warning">Save User Changes</button>
+                <a type="button" class="btn btn-danger" th:href="'/usrmanagement/delete/' + ${userData.systemUserID}">
+                    Delete This User</a>
+            </div>
+        </form>
+    </div>
+</div>

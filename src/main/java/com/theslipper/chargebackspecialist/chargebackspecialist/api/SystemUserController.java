@@ -23,7 +23,7 @@ public class SystemUserController {
         this.systemUserService.addSystemUser(user);
     }
 
-    @DeleteMapping
+    @DeleteMapping(path = "{id}")
     private void deleteSystemUserByID(@PathVariable("id") UUID id) {
         systemUserService.rmSystemUserByID(id);
     }

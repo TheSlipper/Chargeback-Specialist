@@ -35,6 +35,7 @@
             <th scope="col">User's Role</th>
             <th scope="col">User's e-mail</th>
             <th scope="col">Account registration date</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -43,13 +44,14 @@
                 <th scope="row" th:text="${systemUser.systemUserID}"></th>
                 <td th:text="${systemUser.systemUserName}"></td>
                 <td th:text="${systemUser.systemUserSurname}"></td>
-                <td>
-                    <th:block th:each="role : ${systemUser.systemUserRoles}">
-                        [[${role.systemUserRoleName}]]
-                    </th:block>
-                </td>
+                <td th:text="${systemUser.systemUserRole.systemUserRoleName}"></td>
                 <td th:text="${systemUser.systemUserEmail}"></td>
                 <td th:text="${systemUser.systemUserAccountCreationDate}"></td>
+                <td>
+                    <a class="btn btn-warning" th:href="'/usrmanagement/editform/' + ${systemUser.systemUserID}">
+                        ✎ Edit User
+                    </a>
+                </td>
             </tr>
         </th:block>
         </tbody>
@@ -82,7 +84,6 @@
                     <a class="page-link" th:href="'/usrmanagement/listing/'+${pageNo + 1}" >Next</a>
                 </li>
             </th:block>
-
         </ul>
     </nav>
 </div>

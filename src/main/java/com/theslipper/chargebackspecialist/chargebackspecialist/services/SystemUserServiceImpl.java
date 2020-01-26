@@ -9,7 +9,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import java.util.Iterator;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -24,6 +23,11 @@ public class SystemUserServiceImpl implements SystemUserService {
 
     @Override
     public void addSystemUser(SystemUser systemUser) {
+        this.systemUserRepository.save(systemUser);
+    }
+
+    @Override
+    public void editSystemUser(SystemUser systemUser) {
         this.systemUserRepository.save(systemUser);
     }
 
@@ -46,7 +50,7 @@ public class SystemUserServiceImpl implements SystemUserService {
     @Override
     public boolean isPageEmpty(int pageNo) {
         Page<SystemUser> users = systemUserRepository.findAll(PageRequest.of(pageNo, 5));
-        return users.isEmpty();
+        return users.getTotalPages() <= pageNo;
     }
 
     @Override
