@@ -1,5 +1,6 @@
 package com.theslipper.chargebackspecialist.chargebackspecialist.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -33,9 +34,73 @@ public class CardHolder {
 
     /** Card holder's surname. */
     @Column(name = "card_holder_surname", updatable = false, nullable = false)
-    private String cardholdersSurname;
+    private String cardHoldersSurname;
 
     /** The card issuer of the card holder. */
     @ManyToOne
     private CardIssuer cardIssuer;
+
+    public CardHolder(@JsonProperty("cardHoldersID") UUID cardHoldersID,
+                      @JsonProperty("cardHoldersCountry") String cardHoldersCountry,
+                      @JsonProperty("cardholdersCardNumber") String cardholdersCardNumber,
+                      @JsonProperty("cardholdersFirstName") String cardholdersFirstName,
+                      @JsonProperty("cardholdersSurname") String cardHoldersSurname,
+                      @JsonProperty("cardIssuer") CardIssuer cardIssuer) {
+        this.cardHoldersID = cardHoldersID;
+        this.cardHoldersCountry = cardHoldersCountry;
+        this.cardholdersCardNumber = cardholdersCardNumber;
+        this.cardholdersFirstName = cardholdersFirstName;
+        this.cardHoldersSurname = cardHoldersSurname;
+    }
+
+    public CardHolder() {
+    }
+
+    public UUID getCardHoldersID() {
+        return cardHoldersID;
+    }
+
+    public void setCardHoldersID(UUID cardHoldersID) {
+        this.cardHoldersID = cardHoldersID;
+    }
+
+    public String getCardHoldersCountry() {
+        return cardHoldersCountry;
+    }
+
+    public void setCardHoldersCountry(String cardHoldersCountry) {
+        this.cardHoldersCountry = cardHoldersCountry;
+    }
+
+    public String getCardholdersCardNumber() {
+        return cardholdersCardNumber;
+    }
+
+    public void setCardholdersCardNumber(String cardholdersCardNumber) {
+        this.cardholdersCardNumber = cardholdersCardNumber;
+    }
+
+    public String getCardholdersFirstName() {
+        return cardholdersFirstName;
+    }
+
+    public void setCardholdersFirstName(String cardholdersFirstName) {
+        this.cardholdersFirstName = cardholdersFirstName;
+    }
+
+    public String getCardHoldersSurname() {
+        return cardHoldersSurname;
+    }
+
+    public void setCardHoldersSurname(String cardholdersSurname) {
+        this.cardHoldersSurname = cardholdersSurname;
+    }
+
+    public CardIssuer getCardIssuer() {
+        return cardIssuer;
+    }
+
+    public void setCardIssuer(CardIssuer cardIssuer) {
+        this.cardIssuer = cardIssuer;
+    }
 }

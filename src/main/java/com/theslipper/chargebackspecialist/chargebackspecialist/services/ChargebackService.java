@@ -6,9 +6,12 @@ import com.theslipper.chargebackspecialist.chargebackspecialist.models.Vendor;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 public interface ChargebackService {
     Iterable<Chargeback> getAllChargebackEntries();
+    Optional<Chargeback> getChargebackByID(UUID id);
     List<Chargeback> getChargebacksByCode(Chargeback.ChargebackCode code);
     List<Chargeback> getChargebacksByDateOfAppearance(Date date);
     List<Chargeback> getChargebacksDateOfOpening(Date date);

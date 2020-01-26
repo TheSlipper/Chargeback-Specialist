@@ -1,5 +1,6 @@
 package com.theslipper.chargebackspecialist.chargebackspecialist.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -26,4 +27,38 @@ public class CardIssuer {
     /** Flag that determines whether we support the companies cards. */
     @Column(name = "card_issuer_support", nullable = false)
     private boolean productsSupported;
+
+    public CardIssuer(@JsonProperty("issuerID") UUID issuerID, @JsonProperty("cardIssuerName") String cardIssuerName,
+                      @JsonProperty("productsSupported") boolean productsSupported) {
+        this.issuerID = issuerID;
+        this.cardIssuerName = cardIssuerName;
+        this.productsSupported = productsSupported;
+    }
+
+    public CardIssuer() {
+    }
+
+    public UUID getIssuerID() {
+        return issuerID;
+    }
+
+    public void setIssuerID(UUID issuerID) {
+        this.issuerID = issuerID;
+    }
+
+    public String getCardIssuerName() {
+        return cardIssuerName;
+    }
+
+    public void setCardIssuerName(String cardIssuerName) {
+        this.cardIssuerName = cardIssuerName;
+    }
+
+    public boolean isProductsSupported() {
+        return productsSupported;
+    }
+
+    public void setProductsSupported(boolean productsSupported) {
+        this.productsSupported = productsSupported;
+    }
 }

@@ -1,5 +1,6 @@
 package com.theslipper.chargebackspecialist.chargebackspecialist.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -120,5 +121,89 @@ public class Chargeback {
         MC_LATE_PRESENTMENT, // 4842
         INCORRECT_CURRENCY_CODE // 4846
         // TODO: If necessary make AMEX and DISCOVER chargeback support as well
+    }
+
+    public Chargeback(@JsonProperty("chargebackProcessID") UUID chargebackProcessID,
+                      @JsonProperty("chargebackEntryID") UUID chargebackEntryID,
+                      @JsonProperty("chargebackCode") ChargebackCode chargebackCode,
+                      @JsonProperty("chargebackSubmitDate") Date chargebackSubmitDate,
+                      @JsonProperty("chargebackOpenedDate") Date chargebackOpenedDate,
+                      @JsonProperty("chargebackProcessedDate") Date chargebackProcessedDate,
+                      @JsonProperty("concernedCardHolder") CardHolder concernedCardHolder,
+                      @JsonProperty("concernedVendor") Vendor concernedVendor) {
+        this.chargebackProcessID = chargebackProcessID;
+        this.chargebackEntryID = chargebackEntryID;
+        this.chargebackCode = chargebackCode;
+        this.chargebackSubmitDate = chargebackSubmitDate;
+        this.chargebackOpenedDate = chargebackOpenedDate;
+        this.chargebackProcessedDate = chargebackProcessedDate;
+        this.concernedCardHolder = concernedCardHolder;
+        this.concernedVendor = concernedVendor;
+    }
+
+    public Chargeback() {}
+
+    public UUID getChargebackProcessID() {
+        return chargebackProcessID;
+    }
+
+    public void setChargebackProcessID(UUID chargebackProcessID) {
+        this.chargebackProcessID = chargebackProcessID;
+    }
+
+    public UUID getChargebackEntryID() {
+        return chargebackEntryID;
+    }
+
+    public void setChargebackEntryID(UUID chargebackEntryID) {
+        this.chargebackEntryID = chargebackEntryID;
+    }
+
+    public ChargebackCode getChargebackCode() {
+        return chargebackCode;
+    }
+
+    public void setChargebackCode(ChargebackCode chargebackCode) {
+        this.chargebackCode = chargebackCode;
+    }
+
+    public Date getChargebackSubmitDate() {
+        return chargebackSubmitDate;
+    }
+
+    public void setChargebackSubmitDate(Date chargebackSubmitDate) {
+        this.chargebackSubmitDate = chargebackSubmitDate;
+    }
+
+    public Date getChargebackOpenedDate() {
+        return chargebackOpenedDate;
+    }
+
+    public void setChargebackOpenedDate(Date chargebackOpenedDate) {
+        this.chargebackOpenedDate = chargebackOpenedDate;
+    }
+
+    public Date getChargebackProcessedDate() {
+        return chargebackProcessedDate;
+    }
+
+    public void setChargebackProcessedDate(Date chargebackProcessedDate) {
+        this.chargebackProcessedDate = chargebackProcessedDate;
+    }
+
+    public CardHolder getConcernedCardHolder() {
+        return concernedCardHolder;
+    }
+
+    public void setConcernedCardHolder(CardHolder concernedCardHolder) {
+        this.concernedCardHolder = concernedCardHolder;
+    }
+
+    public Vendor getConcernedVendor() {
+        return concernedVendor;
+    }
+
+    public void setConcernedVendor(Vendor concernedVendor) {
+        this.concernedVendor = concernedVendor;
     }
 }

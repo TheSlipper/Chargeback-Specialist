@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class ChargebackServiceImpl implements ChargebackService {
@@ -19,6 +21,11 @@ public class ChargebackServiceImpl implements ChargebackService {
     @Override
     public Iterable<Chargeback> getAllChargebackEntries() {
         return chargebackRepo.findAll();
+    }
+
+    @Override
+    public Optional<Chargeback> getChargebackByID(UUID id) {
+        return this.chargebackRepo.findById(id);
     }
 
     @Override
