@@ -63,8 +63,7 @@ public class UsrManagementController {
     }
 
     @PostMapping(value = "/edit")
-    public RedirectView userEdit(RedirectAttributes attributes, @ModelAttribute SystemUser systemUser
-                                 /*,@RequestParam("systemUserRole") UUID roleUUID*/) {
+    public RedirectView userEdit(RedirectAttributes attributes, @ModelAttribute SystemUser systemUser) {
         SystemUser original = this.systemUserService.getSystemUserByID(systemUser.getSystemUserID())
                 .orElse(new SystemUser());
         systemUser.setSystemUserLogin(original.getSystemUserLogin());

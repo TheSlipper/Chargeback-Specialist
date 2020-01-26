@@ -1,18 +1,14 @@
 package com.theslipper.chargebackspecialist.chargebackspecialist.services;
 
-import com.theslipper.chargebackspecialist.chargebackspecialist.models.CardHolder;
-import com.theslipper.chargebackspecialist.chargebackspecialist.models.Chargeback;
-import com.theslipper.chargebackspecialist.chargebackspecialist.models.Vendor;
+import com.theslipper.chargebackspecialist.chargebackspecialist.models.*;
 import com.theslipper.chargebackspecialist.chargebackspecialist.repositories.ChargebackRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicReference;
 
 @Service
 public class ChargebackServiceImpl implements ChargebackService {
@@ -36,39 +32,32 @@ public class ChargebackServiceImpl implements ChargebackService {
     }
 
     @Override
+    public Optional<Chargeback> getChargebackEntryForQueue(SystemUser systemUser) {
+        if (systemUser.getSystemUserRole().hasPermission(SystemUserRole.SystemPermission.PROCESS_VISA_CHARGEBACK)
+            || systemUser.getSystemUserRole().hasPermission(SystemUserRole.SystemPermission.PROCESS_MASTERCARD_CHARGEBACK)) {
+            Chargeback targetChargeback = null;
+            Iterator<Chargeback> chargebacks = this.chargebackRepo.findAll().iterator();
+
+            while (chargebacks.hasNext()) {
+                Chargeback chargeback = chargebacks.next();
+                if(systemUser.getSystemUserRole().hasPermission(SystemUserRole.SystemPermission.PROCESS_VISA_CHARGEBACK) &&
+                        (chargeback.getConcernedCardHolder().getCardholdersCardNumber().startsWith("4") &&
+                                chargeback.getChargebackOpenedDate() == null) ||
+                        systemUser.getSystemUserRole().
+                                hasPermission(SystemUserRole.SystemPermission.PROCESS_MASTERCARD_CHARGEBACK)) {
+                    targetChargeback = chargeback;
+                    break;
+                }
+            }
+            return Optional.of(targetChargeback);
+        }
+        return Optional.empty();
+    }
+
+    @Override
     public boolean isPageEmpty(int pageNo) {
         Page<Chargeback> chargebacks = chargebackRepo.findAll(PageRequest.of(pageNo, 5));
         return chargebacks.getTotalPages() <= pageNo;
-    }
-
-    @Override
-    public List<Chargeback> getChargebacksByCode(Chargeback.ChargebackCode code) {
-        return null;
-    }
-
-    @Override
-    public List<Chargeback> getChargebacksByDateOfAppearance(Date date) {
-        return null;
-    }
-
-    @Override
-    public List<Chargeback> getChargebacksDateOfOpening(Date date) {
-        return null;
-    }
-
-    @Override
-    public List<Chargeback> getChargebacksByDateOfProcessing(Date date) {
-        return null;
-    }
-
-    @Override
-    public List<Chargeback> getChargebacksByCardHolderNameSurname(CardHolder cardHolder) {
-        return null;
-    }
-
-    @Override
-    public List<Chargeback> getChargebacksByVendorName(Vendor vendor) {
-        return null;
     }
 
     @Override

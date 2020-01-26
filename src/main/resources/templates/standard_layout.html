@@ -21,7 +21,9 @@
                     )"></div>
                 </th:block>
                 <th:block th:if="${metadata.subsectionName == 'Processing Queue'}">
-                    <div th:replace="'/fragments/'+${metadata.sectionName}+'/'+${metadata.subsectionName} :: div"></div>
+                    <div th:replace="'/fragments/'+${metadata.sectionName}+'/'+${metadata.subsectionName} :: div(
+                        chargebackData = ${chargebackData}
+                    )"></div>
                 </th:block>
             </th:block>
             <th:block th:if="${metadata.sectionName == 'Your Profile'}">
@@ -36,7 +38,6 @@
                     <div th:replace="'/fragments/'+${metadata.sectionName}+'/'+${metadata.subsectionName} :: div(
                         userData = ${userData}, allSystemRoles = ${systemRoles})"></div>
                 </th:block>
-
             </th:block>
         </div>
     </div>

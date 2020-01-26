@@ -2,6 +2,7 @@ package com.theslipper.chargebackspecialist.chargebackspecialist.services;
 
 import com.theslipper.chargebackspecialist.chargebackspecialist.models.CardHolder;
 import com.theslipper.chargebackspecialist.chargebackspecialist.models.Chargeback;
+import com.theslipper.chargebackspecialist.chargebackspecialist.models.SystemUser;
 import com.theslipper.chargebackspecialist.chargebackspecialist.models.Vendor;
 import org.springframework.data.domain.Page;
 
@@ -14,13 +15,8 @@ public interface ChargebackService {
     Iterable<Chargeback> getAllChargebackEntries();
     Optional<Chargeback> getChargebackByID(UUID id);
     Page<Chargeback> getChargebacksFromPage(int pageNo);
+    Optional<Chargeback> getChargebackEntryForQueue(SystemUser systemUser);
     boolean isPageEmpty(int page);
-    List<Chargeback> getChargebacksByCode(Chargeback.ChargebackCode code);
-    List<Chargeback> getChargebacksByDateOfAppearance(Date date);
-    List<Chargeback> getChargebacksDateOfOpening(Date date);
-    List<Chargeback> getChargebacksByDateOfProcessing(Date date);
-    List<Chargeback> getChargebacksByCardHolderNameSurname(CardHolder cardHolder);
-    List<Chargeback> getChargebacksByVendorName(Vendor vendor);
 
     void addChargeback(Chargeback chargeback);
 }

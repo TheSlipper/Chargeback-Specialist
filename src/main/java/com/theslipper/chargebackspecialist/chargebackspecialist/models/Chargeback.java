@@ -2,6 +2,7 @@ package com.theslipper.chargebackspecialist.chargebackspecialist.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -35,14 +36,20 @@ public class Chargeback {
 
     /** The date of card holder's chargeback submission. */
     @Column(name = "chargeback_submit_date", updatable = false, nullable = false)
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "dd-MMM-yyyy hh-mm-ss")
     private Date chargebackSubmitDate;
 
     /** The date at which the chargeback case was opened in chargeback specialist. */
     @Column(name = "chargeback_opened_date", updatable = false)
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "dd-MMM-yyyy hh-mm-ss")
     private Date chargebackOpenedDate;
 
     /** The date at which the chargeback case was processed. */
     @Column(name = "chargeback_processed_date", updatable = false)
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "dd-MMM-yyyy hh-mm-ss")
     private Date chargebackProcessedDate;
 
     /** Card holder that is a part of this chargeback process. */
@@ -52,6 +59,8 @@ public class Chargeback {
     /** Vendor that is a part of this chargeback process. */
     @ManyToOne
     private Vendor concernedVendor;
+
+    // TODO: Add whether it was defended or not and by whom
 
     public enum ChargebackCode {
         // >>>>>>>>>>>>>>>> VISA <<<<<<<<<<<<<<<<

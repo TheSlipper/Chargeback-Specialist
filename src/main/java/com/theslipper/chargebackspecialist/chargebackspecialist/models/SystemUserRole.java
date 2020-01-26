@@ -27,6 +27,19 @@ public class SystemUserRole {
     @Column(name = "system_user_role_permissions", updatable = false, nullable = false)
     private SystemPermission[] permissions;
 
+    /**
+     * Checks if the given role has permission to execute some specified action.
+     * @param systemPermission specified action.
+     * @return true when the role has the permissions.
+     */
+    public boolean hasPermission(SystemPermission systemPermission) {
+        for (SystemPermission s : this.permissions) {
+            if (s == systemPermission)
+                    return true;
+        }
+        return false;
+    }
+
     public enum SystemPermission {
         ADD_USER,
         DELETE_USER,
