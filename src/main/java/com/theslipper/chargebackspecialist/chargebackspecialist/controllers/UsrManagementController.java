@@ -70,13 +70,14 @@ public class UsrManagementController {
             users.add(systemUserService.getSystemUserByID(userID).orElse(new SystemUser()));
             model.addAttribute("systemUsers", users);
         }
-        else if (userName != null)
+        else if (userName != null && !userName.equals("")) {
             model.addAttribute("systemUsers", systemUserService.getSystemUsersByName(userName, pageNo-1));
-        else if (userSurname != null)
+        }
+        else if (userSurname != null  && !userSurname.equals(""))
             model.addAttribute("systemUsers", systemUserService.getSystemUsersBySurname(userSurname, pageNo-1));
-        else if (userEmail != null)
+        else if (userEmail != null && !userEmail.equals(""))
             model.addAttribute("systemUsers", systemUserService.getSystemUsersByEmail(userEmail, pageNo-1));
-        else if (roleID != null)
+        else if (roleID != null) // TODO: Bug over here - always null
             model.addAttribute("systemUsers", systemUserService.
                     getSystemUsersByRole(systemUserService.getSystemUserRoleByID(roleID).
                             orElse(new SystemUserRole()), pageNo-1));
