@@ -14,14 +14,30 @@
             <div class="col">
                 User ID: <input class="form-control" type="text" placeholder="Search" aria-label="Search">
             </div>
+        </div>
+
+        <div class="row">
             <div class="col">
                 User's name: <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+            </div>
+            <div class="col">
+                User's surname: <input class="form-control" type="text" placeholder="Search" aria-label="Search">
             </div>
         </div>
 
         <div class="row">
             <div class="col">
-                Code: <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+                User's email: <input class="form-control" type="email" placeholder="Search" aria-label="Search">
+            </div>
+            <div class="col">
+                User's role:
+                <select class="form-control" name="systemUserRole">
+                    <th:block th:each="role : ${allSystemRoles}">
+                        <option type="checkbox" th:value="${role.systemUserRoleID}"
+                                th:text="${role.systemUserRoleName}">
+                        </option>
+                    </th:block>
+                </select>
             </div>
         </div>
         <button class="btn btn-block btn-primary mt-3 mb-3" type="submit">Search</button>

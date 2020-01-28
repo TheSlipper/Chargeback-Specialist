@@ -39,7 +39,8 @@
             <th:block th:if="${metadata.sectionName == 'User Management'}">
                 <th:block th:if="${metadata.subsectionName == 'Listing'}">
                     <div th:replace="'/fragments/'+${metadata.sectionName}+'/'+${metadata.subsectionName} :: div(systemUsers
-                      = ${systemUsers}, pageNo = ${pageNumber}, isNextPageEmpty = ${isNextPageEmpty})"></div>
+                      = ${systemUsers}, pageNo = ${pageNumber}, isNextPageEmpty = ${isNextPageEmpty},
+                      allSystemRoles = ${allSystemRoles})"></div>
                 </th:block>
                 <th:block th:if="${metadata.subsectionName == 'Edit User'}">
                     <div th:replace="'/fragments/'+${metadata.sectionName}+'/'+${metadata.subsectionName} :: div(

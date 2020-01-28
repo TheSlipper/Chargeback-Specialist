@@ -31,6 +31,7 @@ public class UsrManagementController {
         model.addAttribute("systemUsers", page.toList());
         model.addAttribute("pageNumber", 1);
         model.addAttribute("isNextPageEmpty", this.systemUserService.isPageEmpty(1));
+        model.addAttribute("allSystemRoles", systemUserService.getAllSystemUserRoles());
         return usrManagementViewSectionLayoutName;
     }
 
@@ -42,6 +43,7 @@ public class UsrManagementController {
         model.addAttribute("systemUsers", page.toList());
         model.addAttribute("pageNumber", pageNo);
         model.addAttribute("isNextPageEmpty", this.systemUserService.isPageEmpty(pageNo));
+        model.addAttribute("allSystemRoles", systemUserService.getAllSystemUserRoles());
         return usrManagementViewSectionLayoutName;
     }
 
