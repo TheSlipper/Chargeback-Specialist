@@ -9,8 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class SystemUserServiceImpl implements SystemUserService {
@@ -56,6 +55,30 @@ public class SystemUserServiceImpl implements SystemUserService {
     @Override
     public Optional<SystemUser> getSystemUserByID(UUID id) {
         return this.systemUserRepository.findById(id);
+    }
+
+    @Override
+    public Iterable<SystemUser> getSystemUsersByName(String name, int pageNo) {
+        return this.systemUserRepository.
+                findAllBySystemUserName(name, PageRequest.of(pageNo, 5));
+    }
+
+    @Override
+    public Iterable<SystemUser> getSystemUsersBySurname(String surname, int pageNo) {
+        return this.systemUserRepository.
+                findAllBySystemUserSurname(surname, PageRequest.of(pageNo, 5));
+    }
+
+    @Override
+    public Iterable<SystemUser> getSystemUsersByEmail(String email, int pageNo) {
+        return this.systemUserRepository.
+                findAllBySystemUserEmail(email, PageRequest.of(pageNo, 5));
+    }
+
+    @Override
+    public Iterable<SystemUser> getSystemUsersByRole(SystemUserRole role, int pageNo) {
+        return this.systemUserRepository.
+                findAllBySystemUserRole(role, PageRequest.of(pageNo, 5));
     }
 
     @Override

@@ -10,37 +10,46 @@
         </div>
     </div>
     <div class="md-form mt-0" id="search">
-        <div class="row">
-            <div class="col">
-                User ID: <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+        <form action="/usrmanagement/listing/1" method="post">
+            <div class="row">
+                <div class="col">
+                    User ID: <input class="form-control" type="text" name="userID"
+                                    placeholder="e.g.: 769fceff-d926-44d5-8556-9510a4f7aa37" aria-label="Search">
+                </div>
             </div>
-        </div>
 
-        <div class="row">
-            <div class="col">
-                User's name: <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+            <div class="row">
+                <div class="col">
+                    User's name: <input class="form-control" type="text" name="userName"
+                                        placeholder="e.g.: Katia" aria-label="Search">
+                </div>
+                <div class="col">
+                    User's surname: <input class="form-control" type="text" name="userSurname"
+                                           placeholder="e.g.: Waldheim" aria-label="Search">
+                </div>
             </div>
-            <div class="col">
-                User's surname: <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-            </div>
-        </div>
 
-        <div class="row">
-            <div class="col">
-                User's email: <input class="form-control" type="email" placeholder="Search" aria-label="Search">
-            </div>
-            <div class="col">
-                User's role:
-                <select class="form-control" name="systemUserRole">
-                    <th:block th:each="role : ${allSystemRoles}">
-                        <option type="checkbox" th:value="${role.systemUserRoleID}"
-                                th:text="${role.systemUserRoleName}">
+            <div class="row">
+                <div class="col">
+                    User's email: <input class="form-control" type="email" name="userEmail"
+                                         placeholder="e.g.: katiawaldheim@gmail.com" aria-label="Search">
+                </div>
+                <div class="col">
+                    User's role:
+                    <select class="form-control" name="systemUserRole">
+                        <option type="checkbox" value="">
+                            - No Role Selected -
                         </option>
-                    </th:block>
-                </select>
+                        <th:block th:each="role : ${allSystemRoles}">
+                            <option type="checkbox" th:value="${role.systemUserRoleID}"
+                                    th:text="${role.systemUserRoleName}">
+                            </option>
+                        </th:block>
+                    </select>
+                </div>
             </div>
-        </div>
-        <button class="btn btn-block btn-primary mt-3 mb-3" type="submit">Search</button>
+            <button class="btn btn-block btn-primary mt-3 mb-3" type="submit">Search</button>
+        </form>
     </div>
     <table class="table mt-3">
         <thead>

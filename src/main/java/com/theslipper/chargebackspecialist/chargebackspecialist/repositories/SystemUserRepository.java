@@ -1,14 +1,17 @@
 package com.theslipper.chargebackspecialist.chargebackspecialist.repositories;
 
 import com.theslipper.chargebackspecialist.chargebackspecialist.models.SystemUser;
-import org.springframework.data.repository.CrudRepository;
+import com.theslipper.chargebackspecialist.chargebackspecialist.models.SystemUserRole;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
-import java.util.Date;
-import java.util.Optional;
 import java.util.UUID;
 
 public interface SystemUserRepository extends PagingAndSortingRepository<SystemUser, UUID> {
-    Iterable<SystemUser> findAllBySystemUserAccountCreationDate(Date date);
-
+    Page<SystemUser> findAllBySystemUserName(String name, Pageable pageable);
+    Page<SystemUser> findAllBySystemUserSurname(String surname, Pageable pageable);
+    Page<SystemUser> findAllBySystemUserEmail(String email, Pageable pageable);
+    Page<SystemUser> findAllBySystemUserRole(SystemUserRole systemUserRole, Pageable pageable);
 }
