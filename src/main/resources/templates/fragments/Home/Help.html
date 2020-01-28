@@ -1,8 +1,10 @@
 <html xmlns:th="http://www.thymeleaf.org">
-    <div class="container-fluid">
-    <!--    TODO: Make this dynamic if u have enough time -->
-        <th:block th:each="obj : ${}">
-
-        </th:block>
-    </div>
+<div class="container-fluid">
+    <th:block th:each="entry : ${helpEntries}">
+        <div class="card">
+            <h3 th:text="${entry.header}">Header</h3>
+            <p th:text="${entry.body}">Body</p>
+        </div>
+    </th:block>
+</div>
 </html>

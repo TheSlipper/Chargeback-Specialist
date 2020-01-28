@@ -9,7 +9,14 @@
         <div id="page-content-wrapper">
             <nav th:replace="/fragments/common-layout/navbar :: nav(sectionName = ${metadata.sectionName})"></nav>
             <th:block th:if="${metadata.sectionName == 'Home'}">
-                <div th:replace="'/fragments/'+${metadata.sectionName}+'/'+${metadata.subsectionName} :: div"></div>
+                <th:block th:if="${metadata.subsectionName == 'Help'}">
+                    <div th:replace="'/fragments/'+${metadata.sectionName}+'/'+${metadata.subsectionName} :: div(
+                        helpEntries = ${helpEntries}
+                    )"></div>
+                </th:block>
+                <th:block th:unless="${metadata.subsectionName == 'Help'}">
+                    <div th:replace="'/fragments/'+${metadata.sectionName}+'/'+${metadata.subsectionName} :: div"></div>
+                </th:block>
             </th:block>
             <th:block th:if="${metadata.sectionName == 'Statistics Dashboard'}">
                 <div th:replace="'/fragments/'+${metadata.sectionName}+'/'+${metadata.subsectionName} :: div"></div>

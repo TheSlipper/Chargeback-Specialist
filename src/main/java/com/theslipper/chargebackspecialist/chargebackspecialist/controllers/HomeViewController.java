@@ -1,5 +1,7 @@
 package com.theslipper.chargebackspecialist.chargebackspecialist.controllers;
 
+import com.theslipper.chargebackspecialist.chargebackspecialist.services.HelpEntryService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +15,12 @@ public class HomeViewController {
     private final String homeViewSectionLayoutName = "standard_layout";
     private final String[] homeSectionTitles = {"Home", "Updates", "Help"};
     private final String[] homeSectionLinks = {"/home/home", "/home/updates", "/home/help"};
+    private final HelpEntryService helpEntryService;
+
+    @Autowired
+    public HomeViewController(HelpEntryService helpEntryService) {
+        this.helpEntryService = helpEntryService;
+    }
 
     @RequestMapping(value = {"/", "/home", "/home/home", "/home/Home"})
     public String homeHome(Model model) {
@@ -32,6 +40,7 @@ public class HomeViewController {
     public String homeHelp(Model model) {
         model.addAttribute("metadata", new WebsiteMetadata("Home", "Help",
                 homeSectionTitles, homeSectionLinks));
+        model.addAttribute("helpEntries", helpEntryService.getAllHelpEntries());
         return homeViewSectionLayoutName;
     }
 
