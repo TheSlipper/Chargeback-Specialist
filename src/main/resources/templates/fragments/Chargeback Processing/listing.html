@@ -21,23 +21,24 @@
 
             <div class="row">
                 <div class="col">
-                    Code: <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+                    Chargeback Code:
+                    <select class="form-control" name="chargebackCode">
+                        <option>
+                            - No Code Selected -
+                        </option>
+                        <th:block th:each="code : ${chargebackCodes}">
+                            <option type="checkbox" th:value="${code}" th:text="${code}">
+                            </option>
+                        </th:block>
+                    </select>
                 </div>
             </div>
             <div class="row">
                 <div class="col">
-                    Date of opening: <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+                    Date of opening: <input class="form-control" type="date" aria-label="Search">
                 </div>
                 <div class="col">
-                    Date of processing: <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    Cardholder data: <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-                </div>
-                <div class="col">
-                    Vendor data: <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+                    Date of processing: <input class="form-control" type="date" aria-label="Search">
                 </div>
             </div>
             <button class="btn btn-block btn-primary mt-3 mb-3" type="submit">Search</button>

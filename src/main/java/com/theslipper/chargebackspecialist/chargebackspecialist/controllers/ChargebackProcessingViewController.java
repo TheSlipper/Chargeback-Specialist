@@ -12,6 +12,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.Date;
+import java.util.EnumSet;
 import java.util.Optional;
 
 @Controller
@@ -42,6 +43,8 @@ public class ChargebackProcessingViewController {
         model.addAttribute("chargebacks", this.chargebackService.getChargebacksFromPage(0).toList());
         model.addAttribute("pageNumber", 1);
         model.addAttribute("isNextPageEmpty", this.chargebackService.isPageEmpty(1));
+        EnumSet<Chargeback.ChargebackCode> set = EnumSet.allOf(Chargeback.ChargebackCode.class);
+        model.addAttribute("chargebackCodes", set);
         return chargebackProcessingSectionLayoutName;
     }
 
@@ -53,6 +56,9 @@ public class ChargebackProcessingViewController {
         model.addAttribute("chargebacks", this.chargebackService.getChargebacksFromPage(pageNo-1).toList());
         model.addAttribute("pageNumber", pageNo);
         model.addAttribute("isNextPageEmpty", this.chargebackService.isPageEmpty(pageNo));
+
+        EnumSet<Chargeback.ChargebackCode> set = EnumSet.allOf(Chargeback.ChargebackCode.class);
+        model.addAttribute("chargebackCodes", set);
         return chargebackProcessingSectionLayoutName;
     }
 

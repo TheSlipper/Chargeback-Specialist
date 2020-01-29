@@ -24,7 +24,8 @@
             <th:block th:if="${metadata.sectionName == 'Chargeback Processing'}">
                 <th:block th:if="${metadata.subsectionName == 'Listing'}">
                     <div th:replace="'/fragments/'+${metadata.sectionName}+'/'+${metadata.subsectionName} :: div(
-                        chargebacks = ${chargebacks}, pageNumber = ${pageNumber}, isNextPageEmpty = ${isNextPageEmpty}
+                        chargebacks = ${chargebacks}, pageNumber = ${pageNumber}, isNextPageEmpty = ${isNextPageEmpty},
+                        chargebackCodes = ${chargebackCodes}
                     )"></div>
                 </th:block>
                 <th:block th:if="${metadata.subsectionName == 'Processing Queue'}">
