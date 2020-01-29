@@ -64,4 +64,24 @@ public class ChargebackServiceImpl implements ChargebackService {
     public void addChargeback(Chargeback chargeback) {
         chargebackRepo.save(chargeback);
     }
+
+    @Override
+    public Page<Chargeback> getAllChargebacksByProcessID(UUID id, int pageNo) {
+        return this.chargebackRepo.findAllByChargebackProcessID(id, PageRequest.of(pageNo, 5));
+    }
+
+    @Override
+    public Page<Chargeback> getAllChargebacksByChargebackCode(Chargeback.ChargebackCode code, int pageNo) {
+        return this.chargebackRepo.findAllByChargebackCode(code, PageRequest.of(pageNo, 5));
+    }
+
+    @Override
+    public Page<Chargeback> getAllChargebacksByOpeningDate(Date date, int pageNo) {
+        return this.chargebackRepo.findAllByChargebackOpenedDate(date, PageRequest.of(pageNo, 5));
+    }
+
+    @Override
+    public Page<Chargeback> getAllChargebacksByProcessingDate(Date date, int pageNo) {
+        return this.chargebackRepo.findAllByChargebackProcessedDate(date, PageRequest.of(pageNo, 5));
+    }
 }

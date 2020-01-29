@@ -5,15 +5,14 @@ import com.theslipper.chargebackspecialist.chargebackspecialist.models.SystemUse
 import com.theslipper.chargebackspecialist.chargebackspecialist.models.SystemUserRole;
 import com.theslipper.chargebackspecialist.chargebackspecialist.services.ChargebackService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
-import java.util.Date;
-import java.util.EnumSet;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 public class ChargebackProcessingViewController {
@@ -35,7 +34,7 @@ public class ChargebackProcessingViewController {
             "/chargebacks/queue"
     };
 
-    @RequestMapping(value = {"/chargebacks/", "/chargebacks/listing"})
+    @GetMapping(value = {"/chargebacks/", "/chargebacks/listing"})
     public String chargebacksListing(Model model) {
         model.addAttribute("metadata", new WebsiteMetadata("Chargeback Processing",
                     chargebackProcessingSectionTitles[0], chargebackProcessingSectionTitles,
@@ -57,6 +56,43 @@ public class ChargebackProcessingViewController {
         model.addAttribute("pageNumber", pageNo);
         model.addAttribute("isNextPageEmpty", this.chargebackService.isPageEmpty(pageNo));
 
+        EnumSet<Chargeback.ChargebackCode> set = EnumSet.allOf(Chargeback.ChargebackCode.class);
+        model.addAttribute("chargebackCodes", set);
+        return chargebackProcessingSectionLayoutName;
+    }
+
+    @PostMapping(value = "/chargebacks/listing/{p}")
+    public String chargebackListingFiltered(Model model,
+                                            @PathVariable("p") int pageNo,
+                                            @RequestParam(name = "process-id", required = false) UUID processID,
+                                            @RequestParam(name = "entry-id", required = false) UUID entryID,
+                                            @RequestParam(name = "chargeback-code", required = false) String code,
+                                            @RequestParam(name = "date-of-opening", required = false)
+                                                @DateTimeFormat(pattern = "mm-dd-yyyy") Date dateOfOpening,
+                                            @RequestParam(name = "date-of-processing", required = false)
+                                                @DateTimeFormat(pattern = "mm-dd-yyyy") Date dateOfProcessing) {
+        if (processID != null) {
+            model.addAttribute("chargebacks", this.chargebackService.getAllChargebacksByProcessID(processID, pageNo));
+        } else if (entryID != null) {
+            ArrayList<Chargeback> chargebacks = new ArrayList<>();
+            chargebacks.add(this.chargebackService.getChargebackByID(entryID).orElse(new Chargeback()));
+            model.addAttribute("chargebacks", chargebacks);
+        } else if (code != null) {
+            model.addAttribute("chargebacks", this.chargebackService.
+                    getAllChargebacksByChargebackCode(Chargeback.ChargebackCode.valueOf(code), pageNo - 1));
+        }
+        else if (dateOfOpening != null)
+            model.addAttribute("chargebacks", this.chargebackService.
+                    getAllChargebacksByOpeningDate(dateOfOpening, pageNo-1));
+        else if (dateOfProcessing != null)
+            model.addAttribute("chargebacks", this.chargebackService.
+                    getAllChargebacksByProcessingDate(dateOfProcessing, pageNo-1));
+
+        model.addAttribute("metadata", new WebsiteMetadata("Chargeback Processing",
+                chargebackProcessingSectionTitles[0], chargebackProcessingSectionTitles,
+                chargebackProcessingSectionLinks));
+        model.addAttribute("pageNumber", 1);
+        model.addAttribute("isNextPageEmpty", this.chargebackService.isPageEmpty(1));
         EnumSet<Chargeback.ChargebackCode> set = EnumSet.allOf(Chargeback.ChargebackCode.class);
         model.addAttribute("chargebackCodes", set);
         return chargebackProcessingSectionLayoutName;

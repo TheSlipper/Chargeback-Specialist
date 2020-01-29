@@ -10,38 +10,42 @@
             </div>
         </div>
         <div class="md-form mt-0" id="search">
-            <div class="row">
-                <div class="col">
-                    Process ID: <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+            <form method="post" action="/chargebacks/listing/1">
+                <div class="row">
+                    <div class="col">
+                        Process ID: <input class="form-control" type="text" name="process-id"
+                                           placeholder="e.g.: 38ac3853-9c92-41d3-b495-2ba3a1612097" aria-label="Search">
+                    </div>
+                    <div class="col">
+                        Entry ID: <input class="form-control" type="text" name="entry-id"
+                                         placeholder="e.g.:58e6905f-b338-44ff-b194-233eb76a2903" aria-label="Search">
+                    </div>
                 </div>
-                <div class="col">
-                    Entry ID: <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-                </div>
-            </div>
 
-            <div class="row">
-                <div class="col">
-                    Chargeback Code:
-                    <select class="form-control" name="chargebackCode">
-                        <option>
-                            - No Code Selected -
-                        </option>
-                        <th:block th:each="code : ${chargebackCodes}">
-                            <option type="checkbox" th:value="${code}" th:text="${code}">
+                <div class="row">
+                    <div class="col">
+                        Chargeback Code:
+                        <select class="form-control" name="chargeback-code">
+                            <option>
+                                - No Code Selected -
                             </option>
-                        </th:block>
-                    </select>
+                            <option th:each="code : ${T(com.theslipper.chargebackspecialist.chargebackspecialist.models.
+                                Chargeback.ChargebackCode).values()}" th:value="${code}" th:text="${code}"></option>
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    Date of opening: <input class="form-control" type="date" aria-label="Search">
+                <div class="row">
+                    <div class="col">
+                        Date of opening: <input class="form-control" type="date" name="date-of-opening"
+                                                aria-label="Search">
+                    </div>
+                    <div class="col">
+                        Date of processing: <input class="form-control" type="date" name="date-of-processing"
+                                                   aria-label="Search">
+                    </div>
                 </div>
-                <div class="col">
-                    Date of processing: <input class="form-control" type="date" aria-label="Search">
-                </div>
-            </div>
-            <button class="btn btn-block btn-primary mt-3 mb-3" type="submit">Search</button>
+                <button class="btn btn-block btn-primary mt-3 mb-3" type="submit">Search</button>
+            </form>
         </div>
         <table class="table mt-3">
             <thead>

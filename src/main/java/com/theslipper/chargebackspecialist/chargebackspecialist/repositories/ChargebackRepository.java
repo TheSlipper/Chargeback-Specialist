@@ -11,4 +11,5 @@ public interface ChargebackRepository extends PagingAndSortingRepository<Chargeb
     Page<Chargeback> findAllByChargebackProcessID(UUID uuid, Pageable pageable);
     Page<Chargeback> findAllByChargebackCode(Chargeback.ChargebackCode code, Pageable pageable);
     Page<Chargeback> findAllByChargebackOpenedDate(java.util.Date chargebackOpenedDate, Pageable pageable);
+    Page<Chargeback> findAllByChargebackProcessedDate(java.util.Date chargebackProcessedDate, Pageable pageable);
 }
