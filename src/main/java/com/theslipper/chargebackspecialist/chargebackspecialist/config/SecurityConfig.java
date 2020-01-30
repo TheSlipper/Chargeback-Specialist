@@ -27,10 +27,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity.csrf().disable();
         httpSecurity.authorizeRequests()
                 // Permit All could be added also for statics
-                .antMatchers("/usrmanagement/**").hasRole("System Administrator")
-                .antMatchers("/api/v1/**").hasRole("APIv1 User")
-                .antMatchers("/chargebacks/**").hasAnyRole("Normal User", "System Administrator")
+                .antMatchers("/usrmanagement/**").hasRole("ADMIN")
+                .antMatchers("/api/v1/**").hasRole("ADMIN")
+                .antMatchers("/chargebacks/**").hasAnyRole("USER", "ADMIN")
                 .antMatchers("/**").authenticated()
+                .antMatchers("/profile/**").authenticated()
                 .antMatchers("/registration").permitAll()
                 .antMatchers("/static/**").permitAll();
         httpSecurity.formLogin()
@@ -42,7 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.jdbcAuthentication().dataSource(dataSource)
                 .usersByUsernameQuery("SELECT system_user_login, system_user_password, system_user_enabled FROM system_users " +
                         "WHERE system_user_login = ?")
-                .authoritiesByUsernameQuery("SELECT system_users.system_user_login, system_user_roles.system_user_role_permissions FROM system_users\n" +
+                .authoritiesByUsernameQuery("SELECT system_users.system_user_login, system_user_roles.system_user_role_authority FROM system_users\n" +
                         "    INNER JOIN system_user_roles ON system_users.system_user_role_system_user_role_id = system_user_roles.system_user_role_id\n" +
                         "    WHERE system_users.system_user_login = ?;")
                 .passwordEncoder(new BCryptPasswordEncoder());

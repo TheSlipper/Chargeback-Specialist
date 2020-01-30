@@ -7,6 +7,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Date;
 import java.util.Iterator;
@@ -32,6 +33,9 @@ public class RepoInitializer {
     private final UpdateService updateService;
 
     private final VendorService vendorService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     public RepoInitializer(CardHolderService cardHolderService, CardIssuerService cardIssuerService,
@@ -339,12 +343,14 @@ public class RepoInitializer {
                new SystemUserRole.SystemPermission[] {
                        SystemUserRole.SystemPermission.PROCESS_VISA_CHARGEBACK,
                        SystemUserRole.SystemPermission.PROCESS_MASTERCARD_CHARGEBACK
-               }
+               },
+                "ROLE_USER"
         ));
         this.systemUserService.addSystemUserRole(new SystemUserRole(
                 UUID.fromString("bab1accf-bdc5-4f7d-9ad4-13b596fd7996"),
                 "New User",
-                new SystemUserRole.SystemPermission[] {}
+                new SystemUserRole.SystemPermission[] {},
+                "ROLE_USER"
         ));
         this.systemUserService.addSystemUserRole(new SystemUserRole(
                 UUID.fromString("87d44b9c-8a5c-4fea-ad02-acfe8c97d5bc"),
@@ -358,7 +364,8 @@ public class RepoInitializer {
                         SystemUserRole.SystemPermission.SEND_UPDATE_MESSAGE,
                         SystemUserRole.SystemPermission.DELETE_UPDATE_MESSAGE,
                         SystemUserRole.SystemPermission.EDIT_UPDATE_MESSAGE
-                }
+                },
+                "ROLE_ADMIN"
         ));
     }
 
@@ -376,7 +383,7 @@ public class RepoInitializer {
                 "Domeradzki",
                 "korneldomeradzki1@gmail.com",
                 "Slipper",
-                "Slipper",
+                passwordEncoder.encode("Slipper"),
                 new Date(),
                 null,
                 admin,
@@ -388,7 +395,7 @@ public class RepoInitializer {
                 "Kozłowska",
                 "malwinakozlowska@gmail.com",
                 "kozlowska",
-                "kozlowska",
+                passwordEncoder.encode("kozlowska"),
                 new Date(),
                 null,
                 this.systemUserService.getSystemUserRolesByName("Standard User").iterator().next(),
@@ -400,7 +407,7 @@ public class RepoInitializer {
                 "Jaworska",
                 "zuzannajaworska@gmail.com",
                 "jaworska",
-                "jaworska",
+                passwordEncoder.encode("jaworska"),
                 new Date(),
                 null,
                 standardUser,
@@ -412,7 +419,7 @@ public class RepoInitializer {
                 "Sobolewski",
                 "dominiksobolewski@gmail.com",
                 "sobolewski",
-                "sobolewski",
+                passwordEncoder.encode("sobolewski"),
                 new Date(),
                 null,
                 standardUser,
@@ -424,7 +431,7 @@ public class RepoInitializer {
                 "Kowalik",
                 "patrykkowalik@gmail.com",
                 "kowalik",
-                "kowalik",
+                passwordEncoder.encode("kowalik"),
                 new Date(),
                 null,
                 newUser,
@@ -436,7 +443,7 @@ public class RepoInitializer {
                 "Pluta",
                 "wiktoriapluta@gmail.com",
                 "pluta",
-                "pluta",
+                passwordEncoder.encode("pluta"),
                 new Date(),
                 null,
                 newUser,

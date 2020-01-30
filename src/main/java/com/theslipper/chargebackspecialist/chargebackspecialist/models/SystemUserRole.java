@@ -27,6 +27,9 @@ public class SystemUserRole {
     @Column(name = "system_user_role_permissions", updatable = false, nullable = false)
     private SystemPermission[] permissions;
 
+    @Column(name = "system_user_role_authority", nullable = false)
+    private String authority;
+
     /**
      * Checks if the given role has permission to execute some specified action.
      * @param systemPermission specified action.
@@ -53,10 +56,12 @@ public class SystemUserRole {
 
     public SystemUserRole(@JsonProperty("systemUserRoleID") UUID systemUserRoleID,
                           @JsonProperty("systemUserRoleName") String systemUserRoleName,
-                          @JsonProperty("systemPermissions") SystemPermission[] permissions) {
+                          @JsonProperty("systemPermissions") SystemPermission[] permissions,
+                          @JsonProperty("authority") String authority) {
         this.systemUserRoleName = systemUserRoleName;
         this.permissions = permissions;
         this.systemUserRoleID = systemUserRoleID;
+        this.authority = authority;
     }
 
     public SystemUserRole() {
