@@ -60,6 +60,11 @@ public class ChargebackServiceImpl implements ChargebackService {
     }
 
     @Override
+    public boolean hasChargebacks() {
+        return this.chargebackRepo.findAll().iterator().hasNext();
+    }
+
+    @Override
     public void addChargeback(Chargeback chargeback) {
         chargebackRepo.save(chargeback);
     }

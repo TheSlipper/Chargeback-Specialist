@@ -28,7 +28,8 @@ public class CardIssuer {
     @Column(name = "card_issuer_support", nullable = false)
     private boolean productsSupported;
 
-    public CardIssuer(@JsonProperty("issuerID") UUID issuerID, @JsonProperty("cardIssuerName") String cardIssuerName,
+    public CardIssuer(@JsonProperty("issuerID") UUID issuerID,
+                      @JsonProperty("cardIssuerName") String cardIssuerName,
                       @JsonProperty("productsSupported") boolean productsSupported) {
         this.issuerID = issuerID;
         this.cardIssuerName = cardIssuerName;

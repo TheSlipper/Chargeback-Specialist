@@ -35,7 +35,17 @@ public class CardIssuerServiceImpl implements CardIssuerService {
     }
 
     @Override
+    public Iterable<CardIssuer> getCardIssuersByName(String name) {
+        return this.cardIssuerRepository.findCardIssuerByCardIssuerName(name);
+    }
+
+    @Override
     public Optional<CardIssuer> getCardIssuerByID(UUID uuid) {
         return this.cardIssuerRepository.findById(uuid);
+    }
+
+    @Override
+    public boolean hasCardIssuers() {
+        return this.cardIssuerRepository.findAll().iterator().hasNext();
     }
 }

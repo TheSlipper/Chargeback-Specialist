@@ -22,9 +22,12 @@ public interface SystemUserService {
     Iterable<SystemUser> getSystemUsersBySurname(String surname, int pageNo);
     Iterable<SystemUser> getSystemUsersByEmail(String email, int pageNo);
     Iterable<SystemUser> getSystemUsersByRole(SystemUserRole role, int pageNo);
+    boolean hasSystemUsers();
 
     void addSystemUserRole(SystemUserRole systemUserRole);
     void rmSystemUserRoleByID(UUID id);
     Iterable<SystemUserRole> getAllSystemUserRoles();
     Optional<SystemUserRole> getSystemUserRoleByID(UUID id);
+    Iterable<SystemUserRole> getSystemUserRolesByName(String name);
+    boolean hasSystemUserRoles();
 }

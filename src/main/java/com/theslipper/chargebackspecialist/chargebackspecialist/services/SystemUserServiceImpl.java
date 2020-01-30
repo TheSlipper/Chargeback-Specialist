@@ -82,6 +82,11 @@ public class SystemUserServiceImpl implements SystemUserService {
     }
 
     @Override
+    public boolean hasSystemUsers() {
+        return this.systemUserRepository.findAll().iterator().hasNext();
+    }
+
+    @Override
     public void addSystemUserRole(SystemUserRole systemUserRole) {
         this.systemUserRoleRepository.save(systemUserRole);
     }
@@ -99,5 +104,15 @@ public class SystemUserServiceImpl implements SystemUserService {
     @Override
     public Optional<SystemUserRole> getSystemUserRoleByID(UUID id) {
         return this.systemUserRoleRepository.findById(id);
+    }
+
+    @Override
+    public Iterable<SystemUserRole> getSystemUserRolesByName(String name) {
+        return this.systemUserRoleRepository.findAllBySystemUserRoleName(name);
+    }
+
+    @Override
+    public boolean hasSystemUserRoles() {
+        return this.systemUserRoleRepository.findAll().iterator().hasNext();
     }
 }

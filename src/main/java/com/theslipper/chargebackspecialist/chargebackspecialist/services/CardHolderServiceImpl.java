@@ -39,4 +39,9 @@ public class CardHolderServiceImpl implements CardHolderService {
     public Optional<CardHolder> getCardHolderByID(UUID uuid) {
         return this.cardHolderRepository.findById(uuid);
     }
+
+    @Override
+    public boolean hasCardHolders() {
+        return this.cardHolderRepository.findAll().iterator().hasNext();
+    }
 }

@@ -51,10 +51,12 @@ public class SystemUserRole {
         EDIT_UPDATE_MESSAGE
     }
 
-    public SystemUserRole(@JsonProperty("systemUserRoleName") String systemUserRoleName,
+    public SystemUserRole(@JsonProperty("systemUserRoleID") UUID systemUserRoleID,
+                          @JsonProperty("systemUserRoleName") String systemUserRoleName,
                           @JsonProperty("systemPermissions") SystemPermission[] permissions) {
         this.systemUserRoleName = systemUserRoleName;
         this.permissions = permissions;
+        this.systemUserRoleID = systemUserRoleID;
     }
 
     public SystemUserRole() {

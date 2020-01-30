@@ -11,9 +11,11 @@ public interface TerminalService {
     void rmTerminalModelByID(UUID id);
     Iterable<TerminalModel> getAllTerminalModels();
     Optional<TerminalModel> getTerminalModelByID(UUID id);
+    boolean hasTerminalModels();
 
     void addTerminal(Terminal terminal);
     void rmTerminalByID(UUID id);
     Iterable<Terminal> getAllTerminals();
     Optional<Terminal> getTerminalByID(UUID id);
+    boolean hasTerminals();
 }

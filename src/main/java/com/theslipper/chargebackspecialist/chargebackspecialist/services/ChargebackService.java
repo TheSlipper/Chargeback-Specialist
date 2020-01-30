@@ -17,6 +17,7 @@ public interface ChargebackService {
     Page<Chargeback> getChargebacksFromPage(int pageNo);
     Optional<Chargeback> getChargebackEntryForQueue(SystemUser systemUser);
     boolean isPageEmpty(int page);
+    boolean hasChargebacks();
     void addChargeback(Chargeback chargeback);
     void rmChargebackByID(UUID uuid);
 

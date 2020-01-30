@@ -40,6 +40,11 @@ public class TerminalServiceImpl implements TerminalService {
     }
 
     @Override
+    public boolean hasTerminalModels() {
+        return this.terminalModelRepository.findAll().iterator().hasNext();
+    }
+
+    @Override
     public void addTerminal(Terminal terminal) {
         terminalRepository.save(terminal);
     }
@@ -57,5 +62,10 @@ public class TerminalServiceImpl implements TerminalService {
     @Override
     public Optional<Terminal> getTerminalByID(UUID id) {
         return terminalRepository.findById(id);
+    }
+
+    @Override
+    public boolean hasTerminals() {
+        return this.terminalRepository.findAll().iterator().hasNext();
     }
 }

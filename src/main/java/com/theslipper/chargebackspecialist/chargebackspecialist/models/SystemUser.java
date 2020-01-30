@@ -38,6 +38,9 @@ public class SystemUser {
     @Column(name = "system_user_password", nullable = false)
     private String systemUserPassword;
 
+    @Column(name = "system_user_enabled", nullable = false)
+    private boolean systemUserEnabled;
+
     @Column(name = "system_user_account_creation_date", nullable = false)
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "dd-MMM-yyyy")
@@ -62,7 +65,8 @@ public class SystemUser {
                       @JsonProperty("systemUserPassword") String password,
                       @JsonProperty("systemUserAccountCreationDate") Date systemUserAccountCreationDate,
                       @JsonProperty("systemUserPasswordRefreshDate") Date systemUserPasswordRefreshDate,
-                      @JsonProperty("systemUserRoles") SystemUserRole systemUserRole) {
+                      @JsonProperty("systemUserRoles") SystemUserRole systemUserRole,
+                      @JsonProperty("systemUserEnabled") boolean systemUserEnabled) {
         this.systemUserID = systemUserID;
         this.systemUserName = username;
         this.systemUserSurname = surname;
@@ -72,6 +76,7 @@ public class SystemUser {
         this.systemUserAccountCreationDate = systemUserAccountCreationDate;
         this.systemUserPasswordRefreshDate = systemUserPasswordRefreshDate;
         this.systemUserRole = systemUserRole;
+        this.systemUserEnabled = systemUserEnabled;
     }
 
     public UUID getSystemUserID() {

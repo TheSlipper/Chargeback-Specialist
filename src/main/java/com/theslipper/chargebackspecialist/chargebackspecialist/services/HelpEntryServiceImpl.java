@@ -33,4 +33,9 @@ public class HelpEntryServiceImpl implements HelpEntryService {
     public void addHelpEntry(HelpEntry helpEntry) {
         this.helpEntryRepository.save(helpEntry);
     }
+
+    @Override
+    public boolean hasHelpEntries() {
+        return this.helpEntryRepository.findAll().iterator().hasNext();
+    }
 }

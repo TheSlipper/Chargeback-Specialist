@@ -10,4 +10,5 @@ public interface UpdateService {
     void rmUpdateByID(UUID id);
     Iterable<Update> getAllUpdates();
     Optional<Update> getUpdateByID(UUID id);
+    boolean hasUpdates();
 }

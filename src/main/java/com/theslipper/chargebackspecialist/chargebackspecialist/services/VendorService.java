@@ -12,11 +12,13 @@ public interface VendorService {
     Iterable<VendorType> getAllVendorTypes();
     Optional<VendorType> getVendorTypeByID(UUID id);
     Iterable<VendorType> getVendorTypesByName(String name);
-
     void addVendor(Vendor vendor);
+    boolean hasVendorTypes();
+
     void rmVendorByID(UUID id);
     Iterable<Vendor> getAllVendors();
     Optional<Vendor> getVendorByID(UUID id);
     Iterable<Vendor> getVendorsByName(String name);
     Iterable<Vendor> getVIPVendors();
+    boolean hasVendors();
 }

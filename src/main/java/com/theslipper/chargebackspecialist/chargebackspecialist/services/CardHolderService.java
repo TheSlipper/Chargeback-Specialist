@@ -13,5 +13,6 @@ public interface CardHolderService {
     void rmCardHolderByID(UUID uuid);
     Iterable<CardHolder> getAllCardHolders();
     Optional<CardHolder> getCardHolderByID(UUID uuid);
+    boolean hasCardHolders();
 
 }

@@ -28,16 +28,18 @@ public class Vendor {
      * Identifies what contract the vendor has signed with our company and how important he is for us.
      */
     @ManyToOne
-    VendorType vendorType;
+    private VendorType vendorType;
 
     public Vendor() {
 
     }
 
-    public Vendor(@JsonProperty("vendorName") String vendorName, @JsonProperty("vendorType") VendorType vendorType) {
+    public Vendor(@JsonProperty("vendorID") UUID vendorID,
+                  @JsonProperty("vendorName") String vendorName,
+                  @JsonProperty("vendorType") VendorType vendorType) {
         this.vendorName = vendorName;
         this.vendorType = vendorType;
-        // TODO: Czy można zamienić type na ID
+        this.vendorID = vendorID;
     }
 
     public UUID getVendorID() {

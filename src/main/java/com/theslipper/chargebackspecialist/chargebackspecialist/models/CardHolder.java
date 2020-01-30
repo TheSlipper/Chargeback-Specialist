@@ -51,6 +51,7 @@ public class CardHolder {
         this.cardholdersCardNumber = cardholdersCardNumber;
         this.cardholdersFirstName = cardholdersFirstName;
         this.cardHoldersSurname = cardHoldersSurname;
+        this.cardIssuer = cardIssuer;
     }
 
     public CardHolder() {

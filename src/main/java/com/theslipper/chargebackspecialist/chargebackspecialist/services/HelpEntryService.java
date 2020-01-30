@@ -10,4 +10,5 @@ public interface HelpEntryService {
     Optional<HelpEntry> getHelpEntryByID(UUID uuid);
     void deleteHelpEntryByID(UUID uuid);
     void addHelpEntry(HelpEntry helpEntry);
+    boolean hasHelpEntries();
 }

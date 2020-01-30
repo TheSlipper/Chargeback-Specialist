@@ -11,6 +11,7 @@ public interface CardIssuerService {
     void editCardIssuer(CardIssuer cardIssuer);
     void rmCardIssuerByID(UUID uuid);
     Iterable<CardIssuer> getAllCardIssuers();
+    Iterable<CardIssuer> getCardIssuersByName(String name);
     Optional<CardIssuer> getCardIssuerByID(UUID uuid);
-
+    boolean hasCardIssuers();
 }

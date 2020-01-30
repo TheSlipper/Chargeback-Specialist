@@ -33,4 +33,9 @@ public class UpdateServiceImpl implements UpdateService {
     public Optional<Update> getUpdateByID(UUID id) {
         return this.updateRepository.findById(id);
     }
+
+    @Override
+    public boolean hasUpdates() {
+        return this.updateRepository.findAll().iterator().hasNext();
+    }
 }
