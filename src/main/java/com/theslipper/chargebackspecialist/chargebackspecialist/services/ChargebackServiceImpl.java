@@ -8,7 +8,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.concurrent.atomic.AtomicReference;
 
 @Service
 public class ChargebackServiceImpl implements ChargebackService {
@@ -63,6 +62,11 @@ public class ChargebackServiceImpl implements ChargebackService {
     @Override
     public void addChargeback(Chargeback chargeback) {
         chargebackRepo.save(chargeback);
+    }
+
+    @Override
+    public void rmChargebackByID(UUID uuid) {
+        chargebackRepo.deleteById(uuid);
     }
 
     @Override

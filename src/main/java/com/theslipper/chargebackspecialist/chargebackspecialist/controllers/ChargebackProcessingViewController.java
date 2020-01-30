@@ -128,13 +128,10 @@ public class ChargebackProcessingViewController {
 
     @PostMapping(value = "/chargebacks/process")
     public RedirectView chargebacksPostQueue(RedirectAttributes attributes, @ModelAttribute Chargeback chargeback) {
-        // TODO: If not everything is present get it with the service in here
-        // TODO: Edit method
+        this.chargebackService.rmChargebackByID(chargeback.getChargebackEntryID());
         chargeback.setChargebackProcessedDate(new Date());
         this.chargebackService.addChargeback(chargeback);
 
-        attributes.addFlashAttribute("flashAttribute", "redirectWithRedirectView");
-        attributes.addAttribute("attribute", "redirectWithRedirectView");
         return new RedirectView("/chargebacks/queue");
     }
 }
