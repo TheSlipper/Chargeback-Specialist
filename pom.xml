@@ -80,6 +80,10 @@
             <!-- or, for Android: -->
 <!--            <version>28.2-android</version>-->
         </dependency>
+        <dependency>
+            <groupId>org.thymeleaf.extras</groupId>
+            <artifactId>thymeleaf-extras-springsecurity5</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

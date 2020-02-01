@@ -63,6 +63,8 @@ public class Chargeback {
     // TODO: Add whether it was defended or not and by whom
 
     public enum ChargebackCode {
+        NO_CODE_SELECTED,
+
         // >>>>>>>>>>>>>>>> VISA <<<<<<<<<<<<<<<<
         // https://chargebacks911.com/chargeback-reason-codes/visa/
 

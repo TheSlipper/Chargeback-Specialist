@@ -451,6 +451,34 @@ public class RepoInitializer {
         ));
     }
 
+    private void addHelpEntries() {
+        if (this.helpEntryService.hasHelpEntries())
+            return;
+        this.helpEntryService.addHelpEntry(new HelpEntry(
+                UUID.randomUUID(),
+                "10.1 EMV Liability Shift Counterfeit Fraud",
+                "The cardholder claims a counterfeit chip card was used at a POS system where the transaction was not processed as a chip transaction.",
+                120,
+                "Either a) the merchant's card processor did not transmit the full chip data to Visa; or b) a chip-reading terminal was not actually used.",
+                "Upgrade to compliant terminals\n" +
+                        "Make sure to obtain the correct Cardholder Verification Method (CVM), such as a signature or PIN\n" +
+                        "Take an imprint (either electronic or manual) for every card-present transaction\n" +
+                        "Train staff on the proper handling of terminal issues\n"
+        ));
+        this.helpEntryService.addHelpEntry(new HelpEntry(
+                UUID.randomUUID(),
+                "13.1 Merchandise/Services Not Received",
+                "Cardholder claims goods or services were not received or not received by the agreed upon date.",
+                120,
+                "The merchant delays delivery; the merchant charges the cardholder prior to shipping or delivery; the merchant ships on time or has the product available for pick-up but does not inform the customer; the cardholder fraudulently claims the goods or service did not arrive.",
+                "Provide goods and services as promised\n" +
+                "Don't charge the cardholder's account until after the product has been shipped\n" +
+                "Let cardholders know when the product has been shipped and the estimated date for delivery\n" +
+                "Use tracking and delivery confirmation\n" +
+                "Make sure products are available for pick up when specified\n"
+        ));
+    }
+
     @Bean
     InitializingBean init() {
         return () -> {
@@ -474,6 +502,9 @@ public class RepoInitializer {
 
             // SYSTEM USERS
             addSystemUsers();
+
+            // HELP ENTRIES
+            addHelpEntries();
 
             // TODO: Add init for other types as well
         };

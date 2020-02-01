@@ -26,8 +26,8 @@
                     <div class="col">
                         Chargeback Code:
                         <select class="form-control" name="chargeback-code">
-                            <option>
-                                - No Code Selected -
+                            <option value="NO_CODE_SELECTED">
+                                NO_CODE_SELECTED
                             </option>
                             <option th:each="code : ${T(com.theslipper.chargebackspecialist.chargebackspecialist.models.
                                 Chargeback.ChargebackCode).values()}" th:value="${code}" th:text="${code}"></option>

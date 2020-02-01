@@ -1,5 +1,6 @@
 package com.theslipper.chargebackspecialist.chargebackspecialist.controllers;
 
+import com.google.common.collect.Lists;
 import com.theslipper.chargebackspecialist.chargebackspecialist.models.Chargeback;
 import com.theslipper.chargebackspecialist.chargebackspecialist.models.SystemUser;
 import com.theslipper.chargebackspecialist.chargebackspecialist.models.SystemUserRole;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.time.ZoneId;
 import java.util.*;
 
 @Controller
@@ -68,25 +70,51 @@ public class ChargebackProcessingViewController {
                                             @RequestParam(name = "entry-id", required = false) UUID entryID,
                                             @RequestParam(name = "chargeback-code", required = false) String code,
                                             @RequestParam(name = "date-of-opening", required = false)
-                                                @DateTimeFormat(pattern = "mm-dd-yyyy") Date dateOfOpening,
+                                                @DateTimeFormat(pattern = "yyyy-mm-dd") Date dateOfOpening,
                                             @RequestParam(name = "date-of-processing", required = false)
-                                                @DateTimeFormat(pattern = "mm-dd-yyyy") Date dateOfProcessing) {
+                                                @DateTimeFormat(pattern = "yyyy-mm-dd") Date dateOfProcessing) {
         if (processID != null) {
             model.addAttribute("chargebacks", this.chargebackService.getAllChargebacksByProcessID(processID, pageNo));
         } else if (entryID != null) {
             ArrayList<Chargeback> chargebacks = new ArrayList<>();
             chargebacks.add(this.chargebackService.getChargebackByID(entryID).orElse(new Chargeback()));
             model.addAttribute("chargebacks", chargebacks);
-        } else if (code != null) {
+        } else if (code != null && Chargeback.ChargebackCode.valueOf(code) != Chargeback.ChargebackCode.NO_CODE_SELECTED) {
             model.addAttribute("chargebacks", this.chargebackService.
                     getAllChargebacksByChargebackCode(Chargeback.ChargebackCode.valueOf(code), pageNo - 1));
         }
-        else if (dateOfOpening != null)
-            model.addAttribute("chargebacks", this.chargebackService.
-                    getAllChargebacksByOpeningDate(dateOfOpening, pageNo-1));
-        else if (dateOfProcessing != null)
-            model.addAttribute("chargebacks", this.chargebackService.
-                    getAllChargebacksByProcessingDate(dateOfProcessing, pageNo-1));
+        else if (dateOfOpening != null) {
+            List<Chargeback> allByDate = Lists.newArrayList(this.chargebackService.getAllChargebackEntries());
+            List<Chargeback> allFitting = new ArrayList<>();
+            Calendar c1 = Calendar.getInstance();
+            c1.setTime(new Date());
+            allByDate.forEach(chargeback -> {
+                if (chargeback.getChargebackProcessedDate() != null) {
+                    Calendar c2 = Calendar.getInstance();
+                    c2.setTime(chargeback.getChargebackOpenedDate());
+                    if (c1.get(Calendar.DAY_OF_YEAR) == c2.get(Calendar.DAY_OF_YEAR) &&
+                            c1.get(Calendar.YEAR) == c2.get(Calendar.YEAR))
+                        allFitting.add(chargeback);
+                }
+            });
+            model.addAttribute("chargebacks", allFitting);
+        }
+        else if (dateOfProcessing != null) {
+            List<Chargeback> allByDate = Lists.newArrayList(this.chargebackService.getAllChargebackEntries());
+            List<Chargeback> allFitting = new ArrayList<>();
+            Calendar c1 = Calendar.getInstance();
+            c1.setTime(new Date());
+            allByDate.forEach(chargeback -> {
+                if (chargeback.getChargebackProcessedDate() != null) {
+                    Calendar c2 = Calendar.getInstance();
+                    c2.setTime(chargeback.getChargebackProcessedDate());
+                    if (c1.get(Calendar.DAY_OF_YEAR) == c2.get(Calendar.DAY_OF_YEAR) &&
+                            c1.get(Calendar.YEAR) == c2.get(Calendar.YEAR))
+                        allFitting.add(chargeback);
+                }
+            });
+            model.addAttribute("chargebacks", allFitting);
+        }
 
         model.addAttribute("metadata", new WebsiteMetadata("Chargeback Processing",
                 chargebackProcessingSectionTitles[0], chargebackProcessingSectionTitles,

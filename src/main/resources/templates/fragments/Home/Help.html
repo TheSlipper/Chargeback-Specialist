@@ -1,10 +1,26 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <div class="container-fluid">
-    <th:block th:each="entry : ${helpEntries}">
+    <div class="card mt-3" th:each="entry : ${helpEntries}">
         <div class="card">
-            <h3 th:text="${entry.header}">Header</h3>
-            <p th:text="${entry.body}">Body</p>
+            <div class="card-header">
+                <h2>[[${entry.name}]]</h2>
+            </div>
+
+            <div class="card-body">
+                <div class="row" >
+                    <b>Description:</b> [[${entry.description}]]
+                </div>
+                <div class="row">
+                    <b>Time Limit (Days): </b> [[${entry.timeLimit}]]
+                </div>
+                <div class="row">
+                    <b>Typical Causes: </b> [[${entry.typicalCauses}]]
+                </div>
+                <div class="row">
+                    <b>Prevention Steps: </b> [[${entry.preventionSteps}]]
+                </div>
+            </div>
         </div>
-    </th:block>
+    </div>
 </div>
 </html>

@@ -1,13 +1,14 @@
-<div class="container-fluid">
-    <div class="card">
-        <div class="card-header">
-            User
-        </div>
-        <div class="card-body">
-            Body
-        </div>
-        <div class="card-footer">
-            Footer
+<html xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+    <div class="container-fluid mt-3">
+        <div class="card" sec:authorize="isAuthenticated()">
+            <div class="card-header" >
+                Your Profile
+            </div>
+            <div class="card-body">
+                <b>Username:</b> <span sec:authentication="name"></span><br>
+                <b>Roles:</b> <span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span>
+            </div>
         </div>
     </div>
-</div>
+</html>
