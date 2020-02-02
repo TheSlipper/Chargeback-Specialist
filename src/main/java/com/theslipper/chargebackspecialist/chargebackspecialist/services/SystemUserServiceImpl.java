@@ -82,6 +82,11 @@ public class SystemUserServiceImpl implements SystemUserService {
     }
 
     @Override
+    public List<SystemUser> getSystemUsersByLogin(String login) {
+        return this.systemUserRepository.findAllBySystemUserLogin(login);
+    }
+
+    @Override
     public boolean hasSystemUsers() {
         return this.systemUserRepository.findAll().iterator().hasNext();
     }
@@ -114,5 +119,10 @@ public class SystemUserServiceImpl implements SystemUserService {
     @Override
     public boolean hasSystemUserRoles() {
         return this.systemUserRoleRepository.findAll().iterator().hasNext();
+    }
+
+    @Override
+    public List<SystemUser> getSystemUsersByEmail(String eMail) {
+        return this.systemUserRepository.findAllBySystemUserEmail(eMail);
     }
 }

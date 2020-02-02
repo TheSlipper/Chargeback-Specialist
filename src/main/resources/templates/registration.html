@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="System that simulates a web service used for processing chargebacks written in java and spring.">
+        <meta name="author" content="Kornel Domeradzki">
+        <title>Registration | Chargeback Specialist</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    </head>
+</head>
+<body>
+    <div class="d-flex" id="wrapper">
+        <div class="card">
+            <form action="/registration/process" method="post" th:object="${registrationDto}">
+                <div class="card-header">
+                    Registration Form
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <label for="name">Name: </label>
+                        <input id="name" class="form-control" th:field="*{name}">
+                    </div>
+                    <div class="row">
+                        <label for="surname">Surname: </label>
+                        <input id="surname" class="form-control" th:field="*{surname}">
+                    </div>
+                    <div class="row">
+                        <label for="eMail">E-mail: </label>
+                        <input id="eMail" type="email" class="form-control" th:field="*{eMail}">
+                    </div>
+                    <div class="row">
+                        <label for="login">Login: </label>
+                        <input id="login" class="form-control" th:field="*{login}">
+                    </div>
+                    <div class="row">
+                        <label for="password">Password: </label>
+                        <input id="password" type="password" class="form-control" th:field="*{password}">
+                    </div>
+                    <div class="row">
+                        <label for="passwordConfirm">Confirm Password</label>
+                        <input id="passwordConfirm" type="password" class="form-control" th:field="*{passwordConfirm}">
+                    </div>
+                </div>
+                <div class="row">
+                    <button type="submit" class="btn btn-primary">
+                        Submit
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -3,10 +3,8 @@ package com.theslipper.chargebackspecialist.chargebackspecialist.services;
 import com.theslipper.chargebackspecialist.chargebackspecialist.models.SystemUser;
 import com.theslipper.chargebackspecialist.chargebackspecialist.models.SystemUserRole;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.jpa.repository.Query;
 
-import java.util.Iterator;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -22,6 +20,7 @@ public interface SystemUserService {
     Iterable<SystemUser> getSystemUsersBySurname(String surname, int pageNo);
     Iterable<SystemUser> getSystemUsersByEmail(String email, int pageNo);
     Iterable<SystemUser> getSystemUsersByRole(SystemUserRole role, int pageNo);
+    List<SystemUser> getSystemUsersByLogin(String login);
     boolean hasSystemUsers();
 
     void addSystemUserRole(SystemUserRole systemUserRole);
@@ -30,4 +29,6 @@ public interface SystemUserService {
     Optional<SystemUserRole> getSystemUserRoleByID(UUID id);
     Iterable<SystemUserRole> getSystemUserRolesByName(String name);
     boolean hasSystemUserRoles();
+
+    List<SystemUser> getSystemUsersByEmail(String eMail);
 }

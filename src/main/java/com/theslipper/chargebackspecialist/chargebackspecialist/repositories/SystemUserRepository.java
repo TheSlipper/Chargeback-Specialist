@@ -7,6 +7,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
+import java.util.List;
 import java.util.UUID;
 
 public interface SystemUserRepository extends PagingAndSortingRepository<SystemUser, UUID> {
@@ -14,4 +15,6 @@ public interface SystemUserRepository extends PagingAndSortingRepository<SystemU
     Page<SystemUser> findAllBySystemUserSurname(String surname, Pageable pageable);
     Page<SystemUser> findAllBySystemUserEmail(String email, Pageable pageable);
     Page<SystemUser> findAllBySystemUserRole(SystemUserRole systemUserRole, Pageable pageable);
+    List<SystemUser> findAllBySystemUserLogin(String login);
+    List<SystemUser> findAllBySystemUserEmail(String email);
 }
